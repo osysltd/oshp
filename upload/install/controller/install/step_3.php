@@ -8,7 +8,7 @@ class ControllerInstallStep3 extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('install/installation'); #mod
 
-			$this->model_install_install->database($this->request->post);
+			$this->model_install_installation->database($this->request->post);
 
 			// Catalog config.php
 			$output  = '<?php' . "\n";

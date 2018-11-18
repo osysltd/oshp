@@ -32,116 +32,6 @@ CREATE TABLE `oc_address` (
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- --------------------------------------------------------
-/*--
--- Table structure for table `oc_affiliate`
---
-DROP TABLE IF EXISTS `oc_affiliate`;
-CREATE TABLE `oc_affiliate` (
-  `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
-  `email` varchar(96) NOT NULL,
-  `telephone` varchar(32) NOT NULL,
-  `fax` varchar(32) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `salt` varchar(9) NOT NULL,
-  `company` varchar(40) NOT NULL,
-  `website` varchar(255) NOT NULL,
-  `address_1` varchar(128) NOT NULL,
-  `address_2` varchar(128) NOT NULL,
-  `city` varchar(128) NOT NULL,
-  `postcode` varchar(10) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL,
-  `code` varchar(64) NOT NULL,
-  `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `tax` varchar(64) NOT NULL,
-  `payment` varchar(6) NOT NULL,
-  `cheque` varchar(100) NOT NULL,
-  `paypal` varchar(64) NOT NULL,
-  `bank_name` varchar(64) NOT NULL,
-  `bank_branch_number` varchar(64) NOT NULL,
-  `bank_swift_code` varchar(64) NOT NULL,
-  `bank_account_name` varchar(64) NOT NULL,
-  `bank_account_number` varchar(64) NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `approved` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_id`),
-  INDEX `affiliate_country_idx` (`country_id`),
-  INDEX `affiliate_zone_idx` (`zone_id`)
-  /* CONSTRAINT `affiliate_country_fk`
-	FOREIGN KEY (`country_id`)
-	REFERENCES `oc_country`(`country_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `affiliate_zone_fk`
-	FOREIGN KEY (`zone_id`)
-	REFERENCES `oc_zone`(`zone_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT*
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------
---
--- Table structure for table `oc_affiliate_activity`
---
-DROP TABLE IF EXISTS `oc_affiliate_activity`;
-CREATE TABLE `oc_affiliate_activity` (
-  `affiliate_activity_id` int(11) NOT NULL AUTO_INCREMENT,
-  `affiliate_id` int(11) NOT NULL,
-  `key` varchar(64) NOT NULL,
-  `data` text NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_activity_id`),
-  INDEX `affiliate_activity_affiliate_idx` (`affiliate_id`),
-  CONSTRAINT `affiliate_activity_affiliate_fk`
-	FOREIGN KEY (`affiliate_id`)
-	REFERENCES `oc_affiliate`(`affiliate_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------
---
--- Table structure for table `oc_affiliate_login`
---
-DROP TABLE IF EXISTS `oc_affiliate_login`;
-CREATE TABLE `oc_affiliate_login` (
-  `affiliate_login_id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(96) NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  `total` int(4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_login_id`),
-  KEY `email` (`email`),
-  KEY `ip` (`ip`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------
---
--- Table structure for table `oc_affiliate_transaction`
---
-DROP TABLE IF EXISTS `oc_affiliate_transaction`;
-CREATE TABLE `oc_affiliate_transaction` (
-  `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
-  `affiliate_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `description` text NOT NULL,
-  `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_transaction_id`),
-  INDEX `affiliate_transaction_affiliate_idx` (`affiliate_id`),
-  INDEX `affiliate_transaction_order_idx` (`order_id`),
-  CONSTRAINT `affiliate_transaction_affiliate_fk`
-	FOREIGN KEY (`affiliate_id`)
-	REFERENCES `oc_affiliate`(`affiliate_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `affiliate_transaction_order_fk`
-	FOREIGN KEY (`order_id`)
-	REFERENCES `oc_order`(`order_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------
-*/
---
 -- Table structure for table `oc_api`
 --
 DROP TABLE IF EXISTS `oc_api`;
@@ -1881,69 +1771,6 @@ CREATE TABLE `oc_marketing` (
   PRIMARY KEY (`marketing_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- --------------------------------------------------------
-/*--
--- Table structure for table `oc_menu`
---
-DROP TABLE IF EXISTS `oc_menu`;
-CREATE TABLE `oc_menu` (
-  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `store_id` int(11) NOT NULL,
-  `user_id` int(11) NULL DEFAULT NULL,
-  `type` varchar(6) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`menu_id`),
-  INDEX `menu_store_idx`(`store_id`),
-  INDEX `menu_user_idx`(`user_id`),
-  CONSTRAINT `menu_store_fk`
-	FOREIGN KEY (`store_id`)
-	REFERENCES `oc_store`(`store_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `menu_user_fk`
-	FOREIGN KEY (`user_id`)
-	REFERENCES `oc_user`(`user_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------
---
--- Table structure for table `oc_menu_description`
---
-DROP TABLE IF EXISTS `oc_menu_description`;
-CREATE TABLE `oc_menu_description` (
-  `menu_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`menu_id`, `language_id`),
-  INDEX `menu_description_language_idx` (`language_id`),
-  CONSTRAINT `menu_description_language_fk`
-	FOREIGN KEY (`language_id`)
-	REFERENCES `oc_language`(`language_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `menu_description_menu_fk`
-	FOREIGN KEY (`menu_id`)
-	REFERENCES `oc_menu`(`menu_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------
---
--- Table structure for table `oc_menu_module`
---
-DROP TABLE IF EXISTS `oc_menu_module`;
-CREATE TABLE `oc_menu_module` (
-  `menu_module_id` int(11) NOT NULL,
-  `menu_id` int(11) NOT NULL,
-  `code` varchar(64) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`menu_module_id`),
-  INDEX `menu_module_description_menu_idx` (`menu_id`),
-  CONSTRAINT `menu_module_description_menu_fk`
-	FOREIGN KEY (`menu_id`)
-	REFERENCES `oc_menu`(`menu_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-*/
---
 -- Table structure for table `oc_modification`
 --
 DROP TABLE IF EXISTS `oc_modification`;
@@ -2251,37 +2078,6 @@ CREATE TABLE `oc_order` (
 	ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- --------------------------------------------------------
-/*--
--- Table structure for table `oc_order_custom_field`
---
-DROP TABLE IF EXISTS `oc_order_custom_field`;
-CREATE TABLE `oc_order_custom_field` (
-  `order_custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `custom_field_id` int(11) NOT NULL,
-  `custom_field_value_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `value` text NOT NULL,
-  `type` varchar(32) NOT NULL,
-  `location` varchar(16) NOT NULL,
-  PRIMARY KEY (`order_custom_field_id`),
-  INDEX `order_custom_field_order_idx` (`order_id`),
-  INDEX `order_custom_field_custom_field_idx` (`custom_field_id`),
-  INDEX `order_custom_field_custom_field_value_idx` (`custom_field_value_id`),
-  CONSTRAINT `order_custom_field_order_fk`
-	FOREIGN KEY (`order_id`)
-	REFERENCES `oc_order`(`order_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `order_custom_field_custom_field_fk`
-	FOREIGN KEY (`custom_field_id`)
-	REFERENCES `oc_custom_field`(`custom_field_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `order_custom_field_custom_field_value_fk`
-	FOREIGN KEY (`custom_field_value_id`)
-	REFERENCES `oc_custom_field_value`(`custom_field_value_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
--- --------------------------------------------------------*/
 --
 -- Table structure for table `oc_order_history`
 --
@@ -3819,90 +3615,6 @@ CREATE TABLE `oc_upload` (
   PRIMARY KEY (`upload_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- --------------------------------------------------------
-/*--
--- Table structure for table `oc_url_alias`
---
-DROP TABLE IF EXISTS `oc_url_alias`;
-CREATE TABLE `oc_url_alias` (
-  `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
-  `query` varchar(255) NOT NULL,
-  `keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`url_alias_id`),
-  KEY `query` (`query`),
-  KEY `keyword` (`keyword`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
---
--- Dumping data for table `oc_url_alias`
---
-INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
-(824, 'product_id=48', 'ipod-classic'),
-(836, 'category_id=20', 'desktops'),
-(834, 'category_id=26', 'pc'),
-(835, 'category_id=27', 'mac'),
-(730, 'manufacturer_id=8', 'apple'),
-(772, 'information_id=4', 'about_us'),
-(768, 'product_id=42', 'test'),
-(789, 'category_id=34', 'mp3-players'),
-(781, 'category_id=36', 'test2'),
-(774, 'category_id=18', 'laptop-notebook'),
-(775, 'category_id=46', 'macs'),
-(776, 'category_id=45', 'windows'),
-(777, 'category_id=25', 'component'),
-(778, 'category_id=29', 'mouse'),
-(779, 'category_id=28', 'monitor'),
-(780, 'category_id=35', 'test1'),
-(782, 'category_id=30', 'printer'),
-(783, 'category_id=31', 'scanner'),
-(784, 'category_id=32', 'web-camera'),
-(785, 'category_id=57', 'tablet'),
-(786, 'category_id=17', 'software'),
-(787, 'category_id=24', 'smartphone'),
-(788, 'category_id=33', 'camera'),
-(790, 'category_id=43', 'test11'),
-(791, 'category_id=44', 'test12'),
-(792, 'category_id=47', 'test15'),
-(793, 'category_id=48', 'test16'),
-(794, 'category_id=49', 'test17'),
-(795, 'category_id=50', 'test18'),
-(796, 'category_id=51', 'test19'),
-(797, 'category_id=52', 'test20'),
-(798, 'category_id=58', 'test25'),
-(799, 'category_id=53', 'test21'),
-(800, 'category_id=54', 'test22'),
-(801, 'category_id=55', 'test23'),
-(802, 'category_id=56', 'test24'),
-(803, 'category_id=38', 'test4'),
-(804, 'category_id=37', 'test5'),
-(805, 'category_id=39', 'test6'),
-(806, 'category_id=40', 'test7'),
-(807, 'category_id=41', 'test8'),
-(808, 'category_id=42', 'test9'),
-(809, 'product_id=30', 'canon-eos-5d'),
-(840, 'product_id=47', 'hp-lp3065'),
-(811, 'product_id=28', 'htc-touch-hd'),
-(812, 'product_id=43', 'macbook'),
-(813, 'product_id=44', 'macbook-air'),
-(814, 'product_id=45', 'macbook-pro'),
-(816, 'product_id=31', 'nikon-d300'),
-(817, 'product_id=29', 'palm-treo-pro'),
-(818, 'product_id=35', 'product-8'),
-(819, 'product_id=49', 'samsung-galaxy-tab-10-1'),
-(820, 'product_id=33', 'samsung-syncmaster-941bw'),
-(821, 'product_id=46', 'sony-vaio'),
-(837, 'product_id=41', 'imac'),
-(823, 'product_id=40', 'iphone'),
-(825, 'product_id=36', 'ipod-nano'),
-(826, 'product_id=34', 'ipod-shuffle'),
-(827, 'product_id=32', 'ipod-touch'),
-(828, 'manufacturer_id=9', 'canon'),
-(829, 'manufacturer_id=5', 'htc'),
-(830, 'manufacturer_id=7', 'hewlett-packard'),
-(831, 'manufacturer_id=6', 'palm'),
-(832, 'manufacturer_id=10', 'sony'),
-(841, 'information_id=6', 'delivery'),
-(842, 'information_id=3', 'privacy'),
-(843, 'information_id=5', 'terms');
--- --------------------------------------------------------*/
 --
 -- Table structure for table `oc_user`
 --
@@ -4325,7 +4037,8 @@ INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 --
 -- Table structure for table `oc_cron`
 --
-CREATE TABLE IF NOT EXISTS `oc_cron` (
+DROP TABLE IF EXISTS  `oc_cron`;
+CREATE TABLE `oc_cron` (
   `cron_id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(64) NOT NULL,
   `cycle` varchar(12) NOT NULL,
@@ -4338,14 +4051,15 @@ CREATE TABLE IF NOT EXISTS `oc_cron` (
 --
 -- Dumping data for table `oc_cron`
 --
-INSERT INTO `oc_cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES
-(1, 'currency', 'day', 'cron/currency', 1, '2014-09-25 14:40:00', '2014-09-25 14:40:00'),
-(2, 'gdpr', 'day', 'cron/gdpr', 1, '2014-09-25 14:40:00', '2014-09-25 14:40:00');
+INSERT INTO `oc_cron` (`code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES
+('currency', 'day', 'cron/currency', 1, '2014-09-25 14:40:00', '2014-09-25 14:40:00'),
+('gdpr', 'day', 'cron/gdpr', 1, '2014-09-25 14:40:00', '2014-09-25 14:40:00');
 -----------------------------------------------------------
 --
 -- Table structure for tables `oc_customer_`
 --
-CREATE TABLE IF NOT EXISTS `oc_customer_affiliate` (
+DROP TABLE IF EXISTS  `oc_customer_affiliate`;
+CREATE TABLE `oc_customer_affiliate` (
   `customer_id` int(11) NOT NULL,
   `company` varchar(40) NOT NULL,
   `website` varchar(255) NOT NULL,
@@ -4370,7 +4084,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_affiliate` (
 	REFERENCES `oc_customer`(`customer_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-CREATE TABLE IF NOT EXISTS `oc_customer_affiliate_report` (
+DROP TABLE IF EXISTS `oc_customer_affiliate_report`;
+CREATE TABLE `oc_customer_affiliate_report` (
   `customer_affiliate_report_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -4389,7 +4104,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_affiliate_report` (
 	REFERENCES `oc_store`(`store_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-CREATE TABLE IF NOT EXISTS `oc_customer_approval` (
+DROP TABLE IF EXISTS `oc_customer_approval`;
+CREATE TABLE `oc_customer_approval` (
   `customer_approval_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `type` varchar(9) NOT NULL,
@@ -4401,7 +4117,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_approval` (
 	REFERENCES `oc_customer`(`customer_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-CREATE TABLE IF NOT EXISTS `oc_customer_gdpr` (
+DROP TABLE IF EXISTS `oc_customer_gdpr`;
+CREATE TABLE `oc_customer_gdpr` (
   `customer_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
@@ -4416,7 +4133,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_gdpr` (
 --
 -- Table structure for tables `_report`
 --
-CREATE TABLE IF NOT EXISTS `oc_download_report` (
+DROP TABLE IF EXISTS `oc_download_report`;
+CREATE TABLE `oc_download_report` (
   `download_report_id` int(11) NOT NULL AUTO_INCREMENT,
   `download_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -4424,7 +4142,7 @@ CREATE TABLE IF NOT EXISTS `oc_download_report` (
   `country` varchar(2) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`download_report_id`),
-  INDEX `download_report_download_idx` (`download_id``),
+  INDEX `download_report_download_idx` (`download_id`),
   INDEX `download_report_store_idx` (`store_id`),
   CONSTRAINT `download_report_download_fk`
 	FOREIGN KEY (`download_id`)
@@ -4435,7 +4153,8 @@ CREATE TABLE IF NOT EXISTS `oc_download_report` (
 	REFERENCES `oc_store`(`store_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-CREATE TABLE IF NOT EXISTS `oc_marketing_report` (
+DROP TABLE IF EXISTS `oc_marketing_report`;
+CREATE TABLE `oc_marketing_report` (
   `marketing_report_id` int(11) NOT NULL AUTO_INCREMENT,
   `marketing_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -4458,13 +4177,14 @@ CREATE TABLE IF NOT EXISTS `oc_marketing_report` (
 --
 -- Table structure for tables `oc_extension_`
 --
-CREATE TABLE IF NOT EXISTS `oc_extension_install` (
+DROP TABLE IF EXISTS `oc_extension_install`;
+CREATE TABLE `oc_extension_install` (
   `extension_install_id` int(11) NOT NULL AUTO_INCREMENT,
   `extension_id` int(11) NOT NULL,
   `extension_download_id` int(11) NOT NULL,
   `filename` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL,
-  PRIMARY KEY (`extension_install_id`)
+  PRIMARY KEY (`extension_install_id`),
   INDEX `extension_install_extension_idx` (`extension_id`),
   INDEX `extension_install_download_idx` (`extension_download_id`),
   CONSTRAINT `extension_install_extension_fk`
@@ -4472,7 +4192,8 @@ CREATE TABLE IF NOT EXISTS `oc_extension_install` (
 	REFERENCES `oc_extension`(`extension_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-CREATE TABLE IF NOT EXISTS `oc_extension_path` (
+DROP TABLE IF EXISTS `oc_extension_path`;
+CREATE TABLE `oc_extension_path` (
   `extension_path_id` int(11) NOT NULL AUTO_INCREMENT,
   `extension_install_id` int(11) NOT NULL,
   `path` varchar(255) NOT NULL,
@@ -4488,8 +4209,9 @@ CREATE TABLE IF NOT EXISTS `oc_extension_path` (
 --
 -- Table structure for table `oc_shipping_courier`
 --
-CREATE TABLE IF NOT EXISTS `shipping_courier` (
-  `shipping_courier_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `oc_shipping_courier`;
+CREATE TABLE `oc_shipping_courier` (
+  `shipping_courier_id` int(11) NOT NULL AUTO_INCREMENT,
   `shipping_courier_code` varchar(255) NOT NULL,
   `shipping_courier_name` varchar(255) NOT NULL,
   PRIMARY KEY (`shipping_courier_id`)
@@ -4497,22 +4219,23 @@ CREATE TABLE IF NOT EXISTS `shipping_courier` (
 --
 -- Dumping data for table `oc_shipping_courier`
 --
-INSERT INTO `oc_shipping_courier` (`shipping_courier_id`, `shipping_courier_code`, `shipping_courier_name`) VALUES
-  (1, 'dhl', 'DHL'),
-  (2, 'fedex', 'Fedex'),
-  (3, 'ups', 'UPS'),
-  (4, 'royal-mail', 'Royal Mail'),
-  (5, 'usps', 'United States Postal Service'),
-  (6, 'auspost', 'Australia Post');
+INSERT INTO `oc_shipping_courier` (`shipping_courier_code`, `shipping_courier_name`) VALUES
+  ('dhl', 'DHL'),
+  ('fedex', 'Fedex'),
+  ('ups', 'UPS'),
+  ('royal-mail', 'Royal Mail'),
+  ('usps', 'United States Postal Service'),
+  ('auspost', 'Australia Post');
 -----------------------------------------------------------
 --
 -- Table structure for table `oc_order_shipment`
 --
-CREATE TABLE IF NOT EXISTS `oc_order_shipment` (
+DROP TABLE IF EXISTS `oc_order_shipment`;
+CREATE TABLE `oc_order_shipment` (
   `order_shipment_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL,
-  `shipping_courier_id` varchar(255) NOT NULL,
+  `shipping_courier_id` int(11) NOT NULL,
   `tracking_number` varchar(255) NOT NULL,
   PRIMARY KEY (`order_shipment_id`),
   INDEX `order_shipment_order_idx` (`order_id`),
@@ -4530,7 +4253,8 @@ CREATE TABLE IF NOT EXISTS `oc_order_shipment` (
 --
 -- Table structure for tables `oc_seo_`
 --
-CREATE TABLE IF NOT EXISTS `oc_seo_regex` (
+DROP TABLE IF EXISTS `oc_seo_regex`;
+CREATE TABLE `oc_seo_regex` (
   `seo_regex_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `regex` varchar(255) NOT NULL,
@@ -4559,7 +4283,8 @@ INSERT INTO `oc_seo_regex` (`name`, `regex`, `sort_order`) VALUES
 --
 -- Table structure for tables `oc_seo_`
 --
-CREATE TABLE IF NOT EXISTS `oc_seo_url` (
+DROP TABLE IF EXISTS `oc_seo_url`;
+CREATE TABLE `oc_seo_url` (
   `seo_url_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -4659,7 +4384,8 @@ INSERT INTO `oc_seo_url` (`store_id`, `language_id`, `query`, `keyword`, `push`)
 --
 -- Table structure for tables `oc_session`
 --
-CREATE TABLE IF NOT EXISTS `oc_session` (
+DROP TABLE IF EXISTS `oc_session`;
+CREATE TABLE `oc_session` (
   `session_id` varchar(32) NOT NULL,
   `data` text NOT NULL,
   `expire` datetime NOT NULL,
@@ -4669,7 +4395,8 @@ CREATE TABLE IF NOT EXISTS `oc_session` (
 --
 -- Table structure for tables `oc_statistics`
 --
-CREATE TABLE IF NOT EXISTS `oc_statistics` (
+DROP TABLE IF EXISTS `oc_statistics`;
+CREATE TABLE `oc_statistics` (
   `statistics_id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(64) NOT NULL,
   `value` decimal(15,4) NOT NULL,

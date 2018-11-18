@@ -34,7 +34,7 @@ class ModelInstallInstallation extends Model {
 				}
 			}
 			
-		// Data: todo try catch
+		/*** Data
 		$lines = file(DIR_APPLICATION . 'opencart.sql', FILE_IGNORE_NEW_LINES);
 
 		if ($lines) {
@@ -61,7 +61,7 @@ class ModelInstallInstallation extends Model {
 					$start = false;
 				}
 			}
-		}
+		} ***/
 			
 			$db->query("SET CHARACTER SET utf8");
 
