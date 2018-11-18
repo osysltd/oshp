@@ -6,7 +6,7 @@ class ControllerInstallStep3 extends Controller {
 		$this->load->language('install/step_3');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->load->model('install/install');
+			$this->load->model('install/installation'); #mod
 
 			$this->model_install_install->database($this->request->post);
 
