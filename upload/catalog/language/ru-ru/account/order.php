@@ -21,9 +21,9 @@ $_['text_error']            = 'Запрошенный заказ не найде
 
 // Column
 $_['column_order_id']       = '№ Заказа';
-$_['column_product']        = 'Количество';
 $_['column_customer']       = 'Клиент';
-$_['column_name']           = 'Название';
+$_['column_product']        = 'Количество';
+$_['column_name']           = 'Название товара';
 $_['column_model']          = 'Модель';
 $_['column_quantity']       = 'Количество';
 $_['column_price']          = 'Цена';
@@ -35,3 +35,4 @@ $_['column_comment']        = 'Комментарий';
 
 // Error
 $_['error_reorder']         = '%s в данный момент не доступен....';
+

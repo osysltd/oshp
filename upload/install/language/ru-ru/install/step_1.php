@@ -1,10 +1,10 @@
 <?php
 // Heading
-$_['heading_title']  = 'Лицензионное соглашение';
+$_['heading_title'] = 'Лицензионное соглашение';
 
 // Text
-$_['text_step_1']    = 'Пожалуйста, прочтите лицензионное соглашение';
-$_['text_terms']     = '<h3>GNU GENERAL PUBLIC LICENSE</h3>
+$_['text_step_1']   = 'Пожалуйста, прочтите лицензионное соглашение';
+$_['text_terms']    = '<h3>GNU GENERAL PUBLIC LICENSE</h3>
 <p>Version 3, 29 June 2007</p>
 <p>Copyright &copy; 2007 Free Software Foundation, Inc. &lt;http://fsf.org/&gt;</p>
 <p> Everyone is permitted to copy and distribute verbatim copies

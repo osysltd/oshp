@@ -4,7 +4,7 @@ $_['heading_title']      = 'Опции';
 
 // Text
 $_['text_success']       = 'Настройки успешно изменены!';
-$_['text_list']          = 'Опции';
+$_['text_list']          = 'Список опций';
 $_['text_add']           = 'Добавить';
 $_['text_edit']          = 'Редактирование';
 $_['text_choose']        = 'Выбор';
@@ -18,6 +18,8 @@ $_['text_file']          = 'Файл';
 $_['text_date']          = 'Дата';
 $_['text_datetime']      = 'Дата и время';
 $_['text_time']          = 'Время';
+$_['text_option']        = 'Опция';
+$_['text_value']         = 'Значение';
 
 // Column
 $_['column_name']        = 'Опция';
