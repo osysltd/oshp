@@ -33,6 +33,7 @@ $_['text_marketing']                 = 'Маркетинг';
 $_['text_menu']                      = 'Меню';
 $_['text_modification']              = 'Модификаторы';
 $_['text_manufacturer']              = 'Производители';
+$_['text_navigation']                = 'Меню';
 $_['text_option']                    = 'Опции';
 $_['text_order']                     = 'Заказы';
 $_['text_order_status']              = 'Статус заказов';

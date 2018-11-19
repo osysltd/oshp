@@ -34,7 +34,7 @@ class ModelInstallInstallation extends Model {
 				}
 			}
 			
-		/*** Data
+		/*** Original data
 		$lines = file(DIR_APPLICATION . 'opencart.sql', FILE_IGNORE_NEW_LINES);
 
 		if ($lines) {
@@ -62,34 +62,39 @@ class ModelInstallInstallation extends Model {
 				}
 			}
 		} ***/
-			
-			$db->query("SET CHARACTER SET utf8");
 
-			$db->query("SET @@session.sql_mode = 'MYSQL40'");
+            $db->query("SET CHARACTER SET utf8");
 
-			$db->query("DELETE FROM `" . $data['db_prefix'] . "user` WHERE user_id = '1'");
+            $db->query("SET @@session.sql_mode = 'MYSQL40'");
 
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '1', user_group_id = '1', username = '" . $db->escape($data['username']) . "', salt = '" . $db->escape($salt = token(9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
-			
+            $db->query("DELETE FROM `" . $data['db_prefix'] . "user` WHERE user_id = '1'");
+
+            $db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '1', user_group_id = '1', username = '" . $db->escape($data['username']) . "', salt = '', password = '" . $db->escape(password_hash(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', firstname = 'Admin', lastname = 'Root', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
+            $db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_email'");
+
+            $db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_email', value = '" . $db->escape($data['email']) . "'");
+
+            $db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_encryption'");
+
+            $db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_encryption', value = '" . $db->escape(token(1024)) . "'");
+
+            $db->query("UPDATE `" . $data['db_prefix'] . "product` SET `viewed` = '0'");
+
+            $db->query("INSERT INTO `" . $data['db_prefix'] . "api` SET username = 'Default', `key` = '" . $db->escape(token(256)) . "', status = 1, date_added = NOW(), date_modified = NOW()");
+
+            $api_id = $db->getLastId();
+
+            $db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_api_id'");
+
+            $db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', value = '" . (int)$api_id . "'");
+
+            // set the current years prefix
+            #$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `value` = 'INV-" . date('Y') . "-00' WHERE `key` = 'config_invoice_prefix'");
+
             #mod add seller to sellers group and test customer to default customers group
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '2', user_group_id = '2', username = 'seller1', salt = '" . $db->escape($salt = token(9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
-            $db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '3', user_group_id = '2', username = 'seller2', salt = '" . $db->escape($salt = token(9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "customer` SET language_id = '1', customer_group_id = '1', store_id = '0', salt = '" . $db->escape($salt = token(9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($data['email']) . "', status = '1', approved = '1', date_added = NOW()");
-
-			$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_email'");
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_email', value = '" . $db->escape($data['email']) . "'");
-
-			$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_encryption'");
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_encryption', value = '" . $db->escape(token(1024)) . "'");
-
-			$db->query("UPDATE `" . $data['db_prefix'] . "product` SET `viewed` = '0'");
-
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "api` SET name = 'Default', `key` = '" . $db->escape(token(256)) . "', status = 1, date_added = NOW(), date_modified = NOW()");
-
-			$api_id = $db->getLastId();
-
-			$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_api_id'");
-			$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', value = '" . (int)$api_id . "'");
+			$db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '2', user_group_id = '2', username = 'seller1', salt = '', password = '" . $db->escape(password_hash(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', firstname = 'Seller', lastname = 'First', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
+            $db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '3', user_group_id = '2', username = 'seller2', salt = '', password = '" . $db->escape(password_hash(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', firstname = 'Seller', lastname = 'Second', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
+			$db->query("INSERT INTO `" . $data['db_prefix'] . "customer` SET language_id = '1', customer_group_id = '1', store_id = '0', salt = '', password = '" . $db->escape(password_hash(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', firstname = 'Customer', lastname = 'First', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
 		}
 	}
 }
