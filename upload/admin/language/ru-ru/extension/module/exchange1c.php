@@ -1,6 +1,6 @@
 <?php
 // Заголовок
-$_['heading_title']										= 'Обмен данными с 1C v8.x (Tesla-Chita)';
+$_['heading_title']										= 'Обмен данными с 1C v8.x';
 
 // Общие текстовые надписи
 $_['text_confirm']										= 'Вы уверены?';
@@ -19,8 +19,8 @@ $_['text_image_manager']								= 'Менеджер изображений';
 $_['text_browse']										= 'Обзор';
 $_['text_clear']										= 'Очистить';
 $_['text_homepage']										= 'Домашняя страничка модуля';
-$_['text_source_code']									= 'Исходный код на GitHub';
-$_['text_change']										= 'Доработка и поддержка: Кириллов Виталий (Skype: KirilLoveVE, ICQ: 39927648, Viber: +79144306000, email: vitaly.kirillove@mail.ru)';
+$_['text_source_code']									= 'OpenCart';
+$_['text_change']										= 'OpenCart';
 $_['text_date_order']									= 'Дата заказа';
 $_['text_date_exchange']								= 'Дата обмена';
 $_['text_index']										= 'Индекс';

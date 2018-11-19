@@ -4353,8 +4353,8 @@ CREATE TABLE `oc_extension_install` (
 	FOREIGN KEY (`extension_id`)
 	REFERENCES `oc_extension`(`extension_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `extension_install_extension_fk`
-	FOREIGN KEY (`download_id`)
+  CONSTRAINT `extension_install_download_fk`
+	FOREIGN KEY (`extension_download_id`)
 	REFERENCES `oc_download`(`download_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -6,12 +6,6 @@ define('VERSION', '3.1.0.0_b');
 if (is_file('config.php')) {
 	require_once('config.php');
 }
-#mod Preinstallation
-else {
-    copy('config-dist.php','config.php');
-    if (!is_file('admin/config.php'))
-        copy('admin/config-dist.php','admin/config.php');
-}
 
 // Install
 if (!defined('DIR_APPLICATION')) {

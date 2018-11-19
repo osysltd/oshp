@@ -30,7 +30,11 @@ define('DIR_MODIFICATION', DIR_SYSTEM . 'storage/modification/');
 define('DIR_SESSION', DIR_SYSTEM . 'storage/session/');
 define('DIR_UPLOAD', DIR_SYSTEM . 'storage/upload/');
 
-// Startup
+// Startup #mod
+if (!is_file(DIR_OPENCART . 'config.php')&& !is_file(DIR_OPENCART . 'admin/config.php')) {
+copy(DIR_OPENCART . 'config-dist.php', DIR_OPENCART . 'config.php');
+copy(DIR_OPENCART . 'admin/config-dist.php', DIR_OPENCART . 'admin/config.php');
+}
 require_once(DIR_SYSTEM . 'startup.php');
 
 start('install');
