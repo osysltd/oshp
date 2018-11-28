@@ -625,17 +625,17 @@ class ModelExtensionExchange1c extends Model {
 	public function setEvents() {
 
 		// Установка событий
-		$this->load->model('extension/event');
+		$this->load->model('setting/event');
 		// Удалим все события
-		$this->model_extension_event->deleteEvent('exchange1c');
+		$this->model_setting_event->deleteEvent('exchange1c');
 		// Добавим удаление связей при удалении товара
-		$this->model_extension_event->addEvent('exchange1c', 'admin/model/catalog/product/deleteProduct/after', 'extension/module/exchange1c/eventDeleteProduct');
+		$this->model_setting_event->addEvent('exchange1c', 'admin/model/catalog/product/deleteProduct/after', 'extension/module/exchange1c/eventDeleteProduct');
 		// Добавим удаление связей при удалении категории
-		$this->model_extension_event->addEvent('exchange1c', 'admin/model/catalog/category/deleteCategory/after', 'extension/module/exchange1c/eventDeleteCategory');
+		$this->model_setting_event->addEvent('exchange1c', 'admin/model/catalog/category/deleteCategory/after', 'extension/module/exchange1c/eventDeleteCategory');
 		// Добавим удаление связей при удалении Производителя
-		$this->model_extension_event->addEvent('exchange1c', 'admin/model/catalog/manufacturer/deleteManufacturer/after', 'extension/module/exchange1c/eventDeleteManufacturer');
+		$this->model_setting_event->addEvent('exchange1c', 'admin/model/catalog/manufacturer/deleteManufacturer/after', 'extension/module/exchange1c/eventDeleteManufacturer');
 		// Добавим удаление связей при удалении Атрибута
-		$this->model_extension_event->addEvent('exchange1c', 'admin/model/catalog/attribute/deleteAttribute/after', 'extension/module/exchange1c/eventDeleteAttribute');
+		$this->model_setting_event->addEvent('exchange1c', 'admin/model/catalog/attribute/deleteAttribute/after', 'extension/module/exchange1c/eventDeleteAttribute');
 
 	} // setEvents()
 
