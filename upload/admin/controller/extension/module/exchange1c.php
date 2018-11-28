@@ -353,7 +353,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
             $this->session->data['success'] = $this->language->get('text_success');
 
             if (!$refresh) {
-                $this->response->redirect($this->url->link('extension/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+                $this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'));
             }
 
             $data['text_info'] = "Настройки сохранены";
@@ -403,7 +403,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
         );
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_module'),
-            'href' => $this->url->link('extension/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'),
+            'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'),
             'separator' => ' :: '
         );
         $data['breadcrumbs'][] = array(
@@ -414,7 +414,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
         $data['user_token'] = $this->session->data['user_token'];
         $data['refresh'] = $this->url->link('extension/module/exchange1c/refresh', 'user_token=' . $this->session->data['user_token'], 'SSL');
         $data['action'] = $this->url->link('extension/module/exchange1c', 'user_token=' . $this->session->data['user_token'], 'SSL');
-        $data['cancel'] = $this->url->link('extension/extension', 'user_token=' . $this->session->data['user_token'], 'SSL');
+        $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL');
 
         /**
          * ГЕНЕРАЦИЯ ШАБЛОНА
