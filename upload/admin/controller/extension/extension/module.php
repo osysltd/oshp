@@ -176,7 +176,7 @@ class ControllerExtensionExtensionModule extends Controller {
 
 		array_multisort($sort_order, SORT_ASC, $data['extensions']);
 
-		$data['promotion'] = $this->load->controller('extension/extension/promotion');
+		#mod $data['promotion'] = $this->load->controller('extension/extension/promotion');
 
 		$this->response->setOutput($this->load->view('extension/extension/module', $data));
 	}
