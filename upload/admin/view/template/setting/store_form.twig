@@ -41,7 +41,7 @@
                 <label class="col-sm-2 col-form-label" for="input-url">{{ entry_url }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="config_url" value="{{ config_url }}" placeholder="{{ entry_url }}" id="input-url" class="form-control"/>
-                  <small class="form-text text-muted">{{ help_url|escape('html') }}</small>
+                  <small class="form-text text-muted">{{ help_url }}</small>
                   {% if error_url %}
                     <div class="invalid-tooltip">{{ error_url }}</div>
                   {% endif %}
@@ -267,7 +267,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="tab-legal">
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">{{ entry_cookie }}</label>
+                    <label class="col-sm-2 col-form-label" for="input-cookie">{{ entry_cookie }}</label>
                     <div class="col-sm-10">
                       <select name="config_cookie_id" id="input-cookie" class="form-control">
                         <option value="0">{{ text_none }}</option>
