@@ -4278,17 +4278,15 @@ CREATE TABLE `oc_customer_approval` (
 	REFERENCES `oc_customer`(`customer_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-DROP TABLE IF EXISTS `oc_customer_gdpr`;
-CREATE TABLE `oc_customer_gdpr` (
-  `customer_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `oc_gdpr`;
+CREATE TABLE `oc_gdpr` (
+  `gdpr_id` int(11) NOT NULL,
+  `code` varchar(40) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `action` varchar(6) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_id`),
-  INDEX `customer_gdpr_customer_idx` (`customer_id`),
-  CONSTRAINT `customer_gdpr_customer_fk`
-	FOREIGN KEY (`customer_id`)
-	REFERENCES `oc_customer`(`customer_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE
+  PRIMARY KEY (`gdpr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -----------------------------------------------------------
 --
