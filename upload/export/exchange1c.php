@@ -18,6 +18,7 @@ $registry->set('load', $loader);
 
 // Config
 $config = new Config();
+$config->load('default');
 $registry->set('config', $config);
 
 // Database
@@ -130,7 +131,8 @@ $response->addHeader('Content-Type: text/html; charset=utf-8');
 $registry->set('response', $response);
 
 // Session
-$registry->set('session', new Session());
+$session = new Session($config->get('session_engine'), $registry);
+$registry->set('session', $session);
 
 // Cache
 $registry->set('cache', new Cache('file'));
@@ -139,26 +141,28 @@ $registry->set('cache', new Cache('file'));
 $registry->set('document', new Document());
 
 // Language
-$languages = array();
-
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "language");
-
-foreach ($query->rows as $result) {
-	$languages[$result['code']] = array(
-		'language_id'	=> $result['language_id'],
-		'name'		=> $result['name'],
-		'code'		=> $result['code'],
-		'locale'	=> $result['locale'],
-		'directory'	=> $result['directory']
-	);
-}
-
-$config->set('config_language_id', $languages[$config->get('config_admin_language')]['language_id']);
-
-// Language
-$language = new Language($languages[$config->get('config_admin_language')]['directory']);
-$language->load($languages[$config->get('config_admin_language')]['directory']);
+$language = new Language($config->get('language_directory'));
 $registry->set('language', $language);
+
+//$languages = array();
+//
+//$query = $db->query("SELECT * FROM " . DB_PREFIX . "language");
+//
+//foreach ($query->rows as $result) {
+//	$languages[$result['code']] = array(
+//		'language_id'	=> $result['language_id'],
+//		'name'		=> $result['name'],
+//		'code'		=> $result['code'],
+//		'locale'	=> $result['locale'],
+//		'directory'	=> $result['directory']
+//	);
+//}
+//
+//$config->set('config_language_id', $languages[$config->get('config_admin_language')]['language_id']);
+//
+//$language = new Language($languages[$config->get('config_admin_language')]['directory']);
+//$language->load($languages[$config->get('config_admin_language')]['directory']);
+//$registry->set('language', $language);
 
 // Currency
 $registry->set('currency', new Cart\Currency($registry));
@@ -173,14 +177,14 @@ $registry->set('length', new Cart\Length($registry));
 $registry->set('user', new Cart\User($registry));
 
 //OpenBay Pro
-$registry->set('openbay', new Openbay($registry));
+//$registry->set('openbay', new Openbay($registry));
 
 // Event
 $event = new Event($registry);
 $registry->set('event', $event);
 
 // Front Controller
-$controller = new Front($registry);
+$controller = new Router($registry);
 
 // Информация используется для поиска и отладки возможных ошибок в beta версиях
 //$sapi = php_sapi_name();

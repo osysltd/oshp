@@ -2457,9 +2457,9 @@ CREATE TABLE `oc_product` (
   `mpn` varchar(64) NOT NULL,
   `location` varchar(128) NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
-  `stock_status_id` int(11) NOT NULL,
+  `stock_status_id` int(11) NULL DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `manufacturer_id` int(11) NOT NULL,
+  `manufacturer_id` int(11) NULL DEFAULT NULL,
   `shipping` tinyint(1) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `points` int(8) NOT NULL DEFAULT '0',
@@ -3664,8 +3664,9 @@ CREATE TABLE `oc_tax_rate` (
 -- Dumping data for table `oc_tax_rate`
 --
 INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`, `date_added`, `date_modified`) VALUES
-(87, 3, 'НДС 18%', '18.0000', 'P', '2011-09-21 21:49:23', '2014-09-09 11:49:32'),
-(88, 3, 'НДС 20%', '20.0000', 'P', '2011-09-21 21:49:23', '2014-09-09 11:49:32');
+(86, 3, 'НДС 18%', '18.0000', 'P', '2011-09-21 21:49:23', '2014-09-09 11:49:32'),
+(87, 3, 'НДС 20%', '20.0000', 'P', '2011-09-21 21:49:23', '2014-09-09 11:49:32'),
+(88, 3, 'НДС 10%', '10.0000', 'P', '2011-09-21 21:49:23', '2014-09-09 11:49:32');
 -- --------------------------------------------------------
 --
 -- Table structure for table `oc_tax_rate_to_customer_group`
@@ -3689,7 +3690,9 @@ CREATE TABLE `oc_tax_rate_to_customer_group` (
 -- Dumping data for table `oc_tax_rate_to_customer_group`
 --
 INSERT INTO `oc_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`) VALUES
-(87, 1);
+(86, 1),
+(87, 1),
+(88, 1);
 -- --------------------------------------------------------
 --
 -- Table structure for table `oc_tax_rule`
@@ -3717,10 +3720,11 @@ CREATE TABLE `oc_tax_rule` (
 -- Dumping data for table `oc_tax_rule`
 --
 INSERT INTO `oc_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`, `priority`) VALUES
-(121, 10, 86, 'payment', 1),
+(121, 10, 87, 'payment', 1),
 (120, 10, 87, 'store', 0),
-(128, 9, 86, 'shipping', 1),
-(127, 9, 87, 'shipping', 2);
+(128, 9, 88, 'shipping', 1),
+(127, 9, 87, 'shipping', 2),
+(126, 9, 86, 'shipping', 3);
 -- --------------------------------------------------------
 --
 -- Table structure for table `oc_theme`

@@ -941,7 +941,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 
         // Определение полей таблиц которые могут быть в разных версиях CMS
 //		$this->load->model('extension/module');
-//		$this->model_extension_module->addModule('exchange1c',
+//		$this->model_setting_module->addModule('exchange1c',
 //			array(
 //				'version'	=> $this->module_version,
 //				'name'		=> $this->module_name
@@ -1028,7 +1028,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`version` 					VARCHAR(32) 	NOT NULL,
 				UNIQUE KEY `product_link` (`product_id`, `guid`),
 				FOREIGN KEY (`product_id`) 				REFERENCES `" . DB_PREFIX . "product`(`product_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Связь категорий с 1С
@@ -1040,7 +1040,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`version` 					VARCHAR(32) 	NOT NULL,
 				UNIQUE KEY `category_link` (`category_id`,`guid`),
 				FOREIGN KEY (`category_id`) 			REFERENCES `" . DB_PREFIX . "category`(`category_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Свойства из 1С
@@ -1053,7 +1053,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`version`					VARCHAR(32) 	NOT NULL,
 				UNIQUE KEY `attribute_link` (`attribute_id`, `guid`),
 				FOREIGN KEY (`attribute_id`) 			REFERENCES `" . DB_PREFIX . "attribute`(`attribute_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Значения свойства из 1С
@@ -1067,7 +1067,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				PRIMARY KEY (`attribute_value_id`),
 				UNIQUE KEY `attribute_value_key` (`attribute_id`, `guid`),
 				FOREIGN KEY (`attribute_id`) 			REFERENCES `" . DB_PREFIX . "attribute`(`attribute_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Привязка опций к товару
@@ -1075,11 +1075,11 @@ class ControllerExtensionModuleExchange1c extends Controller {
         $this->db->query(
                 "CREATE TABLE `" . DB_PREFIX . "option_to_product` (
 				`option_id` 				INT(11) 		NOT NULL,
-				`product_id` 				VARCHAR(64) 	NOT NULL,
+				`product_id` 				INT(11) 	NOT NULL,
 				UNIQUE KEY `option_link` (`option_id`, `product_id`),
 				FOREIGN KEY (`option_id`) 				REFERENCES `" . DB_PREFIX . "option`(`option_id`),
 				FOREIGN KEY (`product_id`) 				REFERENCES `" . DB_PREFIX . "product`(`product_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Привязка производителя к каталогу 1С
@@ -1091,7 +1091,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`guid` 						VARCHAR(64) 	NOT NULL,
 				UNIQUE KEY `manufacturer_link` (`manufacturer_id`, `guid`),
 				FOREIGN KEY (`manufacturer_id`) 		REFERENCES `" . DB_PREFIX . "manufacturer`(`manufacturer_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Привязка магазина к каталогу в 1С
@@ -1102,7 +1102,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`guid` 						VARCHAR(64) 	NOT NULL,
 				UNIQUE KEY `store_link` (`store_id`, `guid`),
 				FOREIGN KEY (`store_id`) 				REFERENCES `" . DB_PREFIX . "store`(`store_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Остатки товара
@@ -1122,7 +1122,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				FOREIGN KEY (`product_feature_id`) 	REFERENCES `" . DB_PREFIX . "product_feature`(`product_feature_id`),
 				FOREIGN KEY (`warehouse_id`) 		REFERENCES `" . DB_PREFIX . "warehouse`(`warehouse_id`),
 				INDEX (`product_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Характеристики товара
@@ -1139,7 +1139,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				PRIMARY KEY (`product_feature_id`),
 				UNIQUE KEY `product_feature_key` (`product_id`, `guid`),
 				INDEX (`product_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Товарные категории
@@ -1154,7 +1154,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				PRIMARY KEY (`product_category_id`),
 				UNIQUE KEY `product_category_key` (`product_category_id`, `guid`),
 				INDEX (`parent_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
 
@@ -1166,7 +1166,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`guid` 						VARCHAR(64) 	NOT NULL,
 				UNIQUE KEY `option_key` (`option_id`, `guid`),
 				FOREIGN KEY (`option_id`) 				REFERENCES `" . DB_PREFIX . "option`(`option_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Значения характеристики товара(доп. значения)
@@ -1183,7 +1183,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				FOREIGN KEY (`product_option_id`) 		REFERENCES `" . DB_PREFIX . "product_option`(`product_option_id`),
 				FOREIGN KEY (`product_id`) 				REFERENCES `" . DB_PREFIX . "product`(`product_id`),
 				FOREIGN KEY (`product_option_value_id`)	REFERENCES `" . DB_PREFIX . "product_option_value`(`product_option_value_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
         // Цены, если характеристики не используются, эта таблица будет пустая
@@ -1200,7 +1200,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				FOREIGN KEY (`product_id`) 				REFERENCES `" . DB_PREFIX . "product`(`product_id`),
 				FOREIGN KEY (`product_feature_id`) 		REFERENCES `" . DB_PREFIX . "product_feature`(`product_feature_id`),
 				INDEX (`product_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
         );
 
 
@@ -1222,14 +1222,14 @@ class ControllerExtensionModuleExchange1c extends Controller {
         $this->load->model('extension/exchange1c');
         $table_fields = $this->model_extension_exchange1c->defineTableFields();
 
-        $this->load->model('extension/event');
-        $this->model_extension_event->deleteEvent('exchange1c');
+        $this->load->model('setting/event');
+        $this->model_setting_event->deleteEvent('exchange1c');
 
         $this->load->model('setting/setting');
         $this->model_setting_setting->deleteSetting('exchange1c');
 
-        $this->load->model('extension/module');
-        $this->model_extension_module->deleteModule('exchange1c');
+        $this->load->model('setting/module');
+        $this->model_setting_module->deleteModule('exchange1c');
 
         // Удалим директорию в кэше
         $cache = DIR_CACHE . 'exchange1c/';
