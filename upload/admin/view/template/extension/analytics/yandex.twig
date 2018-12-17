@@ -29,7 +29,7 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="input-code">{{ entry_code }}</label>
             <div class="col-sm-10">
-              <textarea name="analytics_google_code" rows="5" placeholder="{{ entry_code }}" id="input-code" class="form-control">{{ analytics_google_code }}</textarea>
+              <textarea name="analytics_yandex_code" rows="5" placeholder="{{ entry_code }}" id="input-code" class="form-control">{{ analytics_yandex_code }}</textarea>
               {% if error_code %}
                 <div class="invalid-tooltip">{{ error_code }}</div>
               {% endif %}
@@ -38,8 +38,8 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="input-status">{{ entry_status }}</label>
             <div class="col-sm-10">
-              <select name="analytics_google_status" id="input-status" class="form-control">
-                {% if analytics_google_status %}
+              <select name="analytics_yandex_status" id="input-status" class="form-control">
+                {% if analytics_yandex_status %}
                   <option value="1" selected="selected">{{ text_enabled }}</option>
                   <option value="0">{{ text_disabled }}</option>
                 {% else %}
