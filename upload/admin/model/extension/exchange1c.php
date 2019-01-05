@@ -8340,6 +8340,14 @@ class ModelExtensionExchange1c extends Model {
 			unset($xml->ПакетПредложений);
 		}
 
+		elseif ($xml->ИзмененияПакетаПредложений) {
+			$this->log("~ЗАГРУЗКА КРАТКОГО ПАКЕТА ПРЕДЛОЖЕНИЙ", 2);
+			// Пакет предложений
+			$this->parseOffersPack($xml->ИзмененияПакетаПредложений);
+			if ($this->ERROR) return $this->error();
+			unset($xml->ИзмененияПакетаПредложений);
+		}
+		
 		// ORDERS.XML
 		if ($xml->Документ) {
 			$this->log("~ЗАГРУЗКА ДОКУМЕНТОВ", 2);
