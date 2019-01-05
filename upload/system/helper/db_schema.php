@@ -4039,6 +4039,11 @@ function db_schema() {
 				'auto_increment' => true
 			),
 			array(
+				'name' => 'variant_id',
+				'type' => 'int(11)',
+				'not_null' => true
+			),
+			array(
 				'name' => 'model',
 				'type' => 'varchar(64)',
 				'not_null' => true
@@ -4076,6 +4081,11 @@ function db_schema() {
 			array(
 				'name' => 'location',
 				'type' => 'varchar(128)',
+				'not_null' => true
+			),
+			array(
+				'name' => 'variant',
+				'type' => 'text',
 				'not_null' => true
 			),
 			array(
