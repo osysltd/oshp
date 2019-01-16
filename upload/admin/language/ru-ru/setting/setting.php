@@ -123,6 +123,19 @@ $_['entry_error_log']                = 'Записывать ошибки';
 $_['entry_error_filename']           = 'Файл журнала ошибок';
 $_['entry_status']                   = 'Статус';
 
+// Tab
+$_['tab_product']                    = 'Товары';
+$_['tab_review']                     = 'Отзывы';
+$_['tab_voucher']                    = 'Сертификаты';
+$_['tab_legal']                      = 'Legal';
+$_['tab_tax']                        = 'Налоги';
+$_['tab_account']                    = 'Клиенты';
+$_['tab_checkout']                   = 'Корзина';
+$_['tab_stock']                      = 'Склад';
+$_['tab_affiliate']                  = 'Партнеры';
+$_['tab_return']                     = 'Возвраты';
+$_['tab_captcha']                    = 'Captcha';
+
 // Help
 $_['help_geocode']                   = 'Пожалуйста, введите ваше местонахождение как GeoCode.';
 $_['help_open']                      = 'Режим работы вашего магазина.';
