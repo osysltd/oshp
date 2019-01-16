@@ -3202,7 +3202,7 @@ class ModelExtensionExchange1c extends Model {
 		if (!$new) {
 			if ($this->FULL_IMPORT) {
 				$this->query("DELETE FROM `" . DB_PREFIX . "product_image` WHERE `product_id` = " . (int)$product_id);
-				$this->log("Удалена картинка: " . $image);
+				$this->log("Удалена картинка для товара №: " . (int)$product_id);
 			} else {
 				// Прочитаем  все старые картинки
 				$query = $this->query("SELECT `product_image_id`,`image` FROM `" . DB_PREFIX . "product_image` WHERE `product_id` = " . (int)$product_id);
