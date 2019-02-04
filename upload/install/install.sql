@@ -779,7 +779,7 @@ CREATE TABLE `oc_currency` (
   `symbol_left` varchar(12) NOT NULL,
   `symbol_right` varchar(12) NOT NULL,
   `decimal_place` char(1) NOT NULL,
-  `value` float(15,8) NOT NULL,
+  `value` dobule(15,8) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`currency_id`)
@@ -953,6 +953,7 @@ DROP TABLE IF EXISTS `oc_customer_ip`;
 CREATE TABLE `oc_customer_ip` (
   `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
@@ -961,6 +962,10 @@ CREATE TABLE `oc_customer_ip` (
   CONSTRAINT `customer_ip_customer_fk`
 	FOREIGN KEY (`customer_id`)
 	REFERENCES `oc_customer`(`customer_id`)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `customer_ip_store_fk`
+	FOREIGN KEY (`store_id`)
+	REFERENCES `oc_store`(`store_id`)
 	ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- --------------------------------------------------------
@@ -1504,8 +1509,8 @@ CREATE TABLE `oc_geo_zone` (
   `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `date_modified` datetime NOT NULL,
   `date_added` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
   PRIMARY KEY (`geo_zone_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 --
@@ -2456,6 +2461,7 @@ CREATE TABLE `oc_product` (
   `isbn` varchar(17) NOT NULL,
   `mpn` varchar(64) NOT NULL,
   `location` varchar(128) NOT NULL,
+  `variant` text NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `stock_status_id` int(11) NULL DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -3735,7 +3741,8 @@ CREATE TABLE `oc_theme` (
   `store_id` int(11) NOT NULL,
   `theme` varchar(64) NOT NULL,
   `route` varchar(64) NOT NULL,
-  `code` text NOT NULL,
+  `code` mediumtext NOT NULL,
+  `date_added` datetime NOT NULL,
   PRIMARY KEY (`theme_id`),
   INDEX `theme_store_idx` (`store_id`),
   CONSTRAINT `theme_store_fk`
@@ -3755,6 +3762,7 @@ CREATE TABLE `oc_translation` (
   `route` varchar(64) NOT NULL,
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
+  `date_added` datetime NOT NULL,
   PRIMARY KEY (`translation_id`),
   INDEX `translation_store_idx` (`store_id`),
   INDEX `translation_language_idx` (`language_id`),
