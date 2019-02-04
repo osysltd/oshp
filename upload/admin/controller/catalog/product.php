@@ -376,7 +376,7 @@ class ControllerCatalogProduct extends Controller {
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $result['product_id'] . ($result['variant_id'] ? '&variant_id=' . $result['variant_id'] : ''). $url),
-				'variant'    => $this->url->link('catalog/product/add', 'user_token=' . $this->session->data['user_token'] . '&variant_id=' . $result['product_id'] . $url)
+				'variant'    => ($result['variant_id'] ? $this->url->link('catalog/product/add', 'user_token=' . $this->session->data['user_token'] . '&variant_id=' . $result['product_id'] . $url) : '')
 			);
 		}
 
@@ -607,12 +607,6 @@ class ControllerCatalogProduct extends Controller {
 		if ($product_id && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$product_info = $this->model_catalog_product->getProduct($product_id);
 		}
-
-		//if ($this->request->get['route'] == 'catalog/product/add' && isset($this->request->get['variant_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-		//	$product_info = $this->model_catalog_product->getProduct($product_id);
-
-		//	print_r($product_info);
-		//}
 
 		$data['user_token'] = $this->session->data['user_token'];
 
@@ -1001,18 +995,23 @@ class ControllerCatalogProduct extends Controller {
 
 			if (isset($product_option['product_option_value'])) {
 				foreach ($product_option['product_option_value'] as $product_option_value) {
-					$product_option_value_data[] = array(
-						'product_option_value_id' => $product_option_value['product_option_value_id'],
-						'option_value_id'         => $product_option_value['option_value_id'],
-						'quantity'                => $product_option_value['quantity'],
-						'subtract'                => $product_option_value['subtract'],
-						'price'                   => $product_option_value['price'],
-						'price_prefix'            => $product_option_value['price_prefix'],
-						'points'                  => $product_option_value['points'],
-						'points_prefix'           => $product_option_value['points_prefix'],
-						'weight'                  => $product_option_value['weight'],
-						'weight_prefix'           => $product_option_value['weight_prefix']
-					);
+					$option_value_info = $this->model_catalog_option->getOptionValue($product_option_value['option_value_id']);
+
+					if ($option_value_info) {
+						$product_option_value_data[] = array(
+							'product_option_value_id' => $product_option_value['product_option_value_id'],
+							'option_value_id'         => $product_option_value['option_value_id'],
+							'name'                    => $option_value_info['name'],
+							'quantity'                => $product_option_value['quantity'],
+							'subtract'                => $product_option_value['subtract'],
+							'price'                   => round($product_option_value['price']),
+							'price_prefix'            => $product_option_value['price_prefix'],
+							'points'                  => round($product_option_value['points']),
+							'points_prefix'           => $product_option_value['points_prefix'],
+							'weight'                  => round($product_option_value['weight']),
+							'weight_prefix'           => $product_option_value['weight_prefix']
+						);
+					}
 				}
 			}
 
@@ -1027,8 +1026,15 @@ class ControllerCatalogProduct extends Controller {
 			);
 		}
 
+		$data['option_values'] = array();
 
-
+		foreach ($data['product_options'] as $product_option) {
+			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
+				if (!isset($data['option_values'][$product_option['option_id']])) {
+					$data['option_values'][$product_option['option_id']] = $this->model_catalog_option->getOptionValues($product_option['option_id']);
+				}
+			}
+		}
 
 		// Variants
 		if (isset($this->request->post['product_variant'])) {
@@ -1039,18 +1045,13 @@ class ControllerCatalogProduct extends Controller {
 			$data['product_variant'] = array();
 		}
 
-		$this->load->model('catalog/product_option');
-		$this->load->model('catalog/option');
-
-		// Options
+		// Variants
 		$data['options'] = array();
 
 		if (isset($this->request->get['variant_id'])) {
-			$product_options = $this->model_catalog_product_option->getProductOptionsByProductId($this->request->get['variant_id']);
+			$product_options = $this->model_catalog_product->getProductOptions($this->request->get['variant_id']);
 
 			foreach ($product_options as $product_option) {
-				$option_info = $this->model_catalog_option->getOption($product_option['option_id']);
-
 				$product_option_value_data = array();
 
 				foreach ($product_option['product_option_value'] as $product_option_value) {
@@ -1066,6 +1067,8 @@ class ControllerCatalogProduct extends Controller {
 						);
 					}
 				}
+
+				$option_info = $this->model_catalog_option->getOption($product_option['option_id']);
 
 				$data['options'][] = array(
 					'product_option_id'    => $product_option['product_option_id'],
@@ -1273,10 +1276,10 @@ class ControllerCatalogProduct extends Controller {
 			$this->error['model'] = $this->language->get('error_model');
 		}
 
-		if ($this->request->get['variant_id']) {
-			$this->load->model('catalog/product_option');
+		if ($this->request->post['variant_id']) {
+			$this->load->model('catalog/product');
 
-			$product_options = $this->model_catalog_product_option->getProductOptionsByProductId($this->request->get['variant_id']);
+			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['variant_id']);
 
 			foreach ($product_options as $product_option) {
 				if ($product_option['required'] && empty($this->request->post['product_variant'][$product_option['product_option_id']])) {
@@ -1336,7 +1339,6 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
 			$this->load->model('catalog/product');
 			$this->load->model('catalog/option');
-			$this->load->model('catalog/product_option');
 
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
@@ -1368,7 +1370,7 @@ class ControllerCatalogProduct extends Controller {
 			foreach ($results as $result) {
 				$option_data = array();
 
-				$product_options = $this->model_catalog_product_option->getProductOptionsByProductId($result['product_id']);
+				$product_options = $this->model_catalog_product->getProductOptions($result['product_id']);
 
 				foreach ($product_options as $product_option) {
 					$option_info = $this->model_catalog_option->getOption($product_option['option_id']);
