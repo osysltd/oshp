@@ -8,14 +8,14 @@
         {% for category in categories %}
           {% if category.children %}
             <li><a href="{{ category.href }}" class="dropdown-item dropdown-toggle nav-link" aria-haspopup="true" >{{ category.name }}</a>
-              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-                <ul class="dropdown-menu">
+              <ul class="dropdown-menu">
+                {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
                   {% for child in children %}
                     <li><a href="{{ child.href }}" class="dropdown-item nav-link">{{ child.name }}</a></li>
                     {% endfor %}
-                  <li><a href="{{ category.href }}" class="dropdown-item nav-link see-all">{{ text_all }} {{ category.name }}</a></li>
-                </ul>
-              {% endfor %}
+                {% endfor %}
+                <li><a href="{{ category.href }}" class="dropdown-item nav-link see-all">{{ text_all }} {{ category.name }}</a></li>
+              </ul>
             </li>
           {% else %}
             <li><a href="{{ category.href }}" class="dropdown-item nav-link">{{ category.name }}</a></li>
@@ -23,5 +23,5 @@
           {% endfor %}
       </ul>
     </li>
-</ul>
+  </ul>
 {% endif %}
