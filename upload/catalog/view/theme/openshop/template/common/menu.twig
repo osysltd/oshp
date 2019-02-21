@@ -13,6 +13,7 @@
                   {% for child in children %}
                     <li><a href="{{ child.href }}" class="dropdown-item nav-link">{{ child.name }}</a></li>
                     {% endfor %}
+                  <li><a href="{{ category.href }}" class="dropdown-item nav-link see-all">{{ text_all }} {{ category.name }}</a></li>
                 </ul>
               {% endfor %}
             </li>
