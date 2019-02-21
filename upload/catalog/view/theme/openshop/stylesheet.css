@@ -79,6 +79,7 @@ div.required .col-form-label:before {
     #top .btn-link:hover {
       color: #444; }
 
+#top .list-inline-item .dropdown-menu,
 #top .list-inline-item .dropdown .dropdown-menu {
   font-size: 1.1em; }
   #top .list-inline-item .dropdown .dropdown-menu > li > a {
