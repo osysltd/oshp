@@ -1,8 +1,7 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 400;
   color: #666;
-  font-size: 12px;
   line-height: 20px;
   width: 100%;
   padding-top: 70px; }
@@ -59,6 +58,8 @@ div.required .col-form-label:before {
   border-top: none;
   border-left: none;
   border-right: none; }
+
+.toast { z-index: 1666 !important; }
 /* top */
 #top {
   background-color: #303030;
@@ -69,6 +70,7 @@ div.required .col-form-label:before {
   #top .list-inline { margin-bottom: 0px; }
   #top .float-right { margin-top: 10px; }
   #top .nav > .list-inline > .list-inline-item, #top .nav > .list-inline .list-inline-item > a,
+  #top .float-right .list-inline > .list-inline-item span a,
   #top .float-right > .list-inline .list-inline-item a.dropdown-toggle {
     color: white;
     /* text-shadow: 0 1px 0 #fff;*/ }
@@ -448,7 +450,7 @@ footer {
     font-family: 'Font Awesome 5 Free'; }
 /* product list */
 .product-thumb {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   margin-bottom: 20px;
   overflow: auto; }
   .product-thumb h2.price {
