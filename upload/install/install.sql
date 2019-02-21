@@ -2487,6 +2487,7 @@ CREATE TABLE `oc_product` (
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`product_id`),
   INDEX `product_user_idx`(`user_id`),
+  INDEX `product_master_idx`(`master_id`),
   INDEX `product_stock_status_idx` (`stock_status_id`),
   INDEX `product_manufacturer_idx` (`manufacturer_id`),
   INDEX `product_tax_class_idx` (`tax_class_id`),
