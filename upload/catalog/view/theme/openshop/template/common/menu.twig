@@ -1,9 +1,11 @@
 {% if categories %}
+  
   <ul class="list-inline">
     <li class="nav-item dropdown list-inline-item">
       <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ text_category }}
       </button>
+
       <ul class="dropdown-menu">
         {% for category in categories %}
           {% if category.children %}
@@ -21,4 +23,7 @@
             {% endif %}
           {% endfor %}
       </ul>
-      {% endif %}
+    </li>
+</ul>
+
+  {% endif %}
