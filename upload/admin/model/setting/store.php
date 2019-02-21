@@ -39,8 +39,8 @@ class ModelSettingStore extends Model {
 	public function getStores($data = array()) {
 		$store_data = $this->cache->get('store');
 
-		if (!$store_data) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "store ORDER BY url");
+		if (!$store_data) { #mod
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "store WHERE store_id != 0 ORDER BY url");
 
 			$store_data = $query->rows;
 

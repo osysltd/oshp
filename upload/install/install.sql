@@ -2452,6 +2452,7 @@ CREATE TABLE `oc_order_voucher` (
 DROP TABLE IF EXISTS `oc_product`;
 CREATE TABLE `oc_product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `master_id` int(11) NULL DEFAULT NULL,
   `user_id` int(11) NULL DEFAULT NULL,
   `model` varchar(64) NOT NULL,
   `sku` varchar(64) NOT NULL,
@@ -2491,6 +2492,10 @@ CREATE TABLE `oc_product` (
   INDEX `product_tax_class_idx` (`tax_class_id`),
   INDEX `product_weight_class_idx` (`weight_class_id`),
   INDEX `product_length_class_idx` (`length_class_id`),
+  CONSTRAINT `product_master_fk`
+	FOREIGN KEY (`master_id`)
+	REFERENCES `oc_product`(`product_id`)
+	ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `product_user_fk`
 	FOREIGN KEY (`user_id`)
 	REFERENCES `oc_user`(`user_id`)
