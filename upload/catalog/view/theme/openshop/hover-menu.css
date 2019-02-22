@@ -1,4 +1,36 @@
 .hover-menu{background: none;margin: 0;padding: 0;min-height:20px}
+.hover-menu .dropdown:hover > .dropdown-menu,
+.hover-menu .dropdown > .dropdown-menu.show {
+    top: 100% !important;
+    transform: none !important;
+    transition: none;
+}
+.hover-menu .dropdown > .dropdown-menu {
+    top: -10000% !important;
+    transform: none !important;
+    transition: top 1s step-end;
+    position: absolute;
+    display: block;
+    list-style: none;
+}
+
+/*
+.hover-menu .dropdown:hover > .dropdown-menu,
+.hover-menu .dropdown > .dropdown-menu.show {
+    top: 100% !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.hover-menu .dropdown > .dropdown-menu {
+    position: absolute !important;
+    transition: top 1s step-end !important;
+    transform: none !important;
+    top: -10000% !important;
+    display: block;
+    list-style: none;
+}
+}*/
 
 @media only screen and (max-width: 991px) {
   .hover-menu .show > .dropdown-toggle::after{

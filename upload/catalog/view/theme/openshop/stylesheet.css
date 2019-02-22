@@ -59,7 +59,13 @@ div.required .col-form-label:before {
   border-left: none;
   border-right: none; }
 
-.toast { z-index: 1666 !important; }
+.toast { 
+  z-index: 1666 !important;
+  top: 10px !important;
+  right: 10px !important;
+  min-height: inherit !important;
+  width: 180px !important;;
+}
 /* top */
 #top {
   background-color: #303030;
