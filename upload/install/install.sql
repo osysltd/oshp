@@ -1934,10 +1934,10 @@ CREATE TABLE `oc_module` (
 -- Dumping data for table `oc_module`
 --
 INSERT INTO `oc_module` (`module_id`, `name`, `code`, `setting`) VALUES
-(30, 'Баннер Категория', 'banner', '{"name":"Категория","banner_id":"6","width":"182","height":"182","status":"1"}'),
-(29, 'Карусель Главная', 'carousel', '{"name":"Главная","banner_id":"8","width":"130","height":"100","status":"1"}'),
-(28, 'Рекомендованные Главная', 'featured', '{"name":"Главная","product":["43","40","42","30"],"limit":"4","width":"200","height":"200","status":"1"}'),
-(27, 'Слайдшоу Главная', 'slideshow', '{"name":"Главная","banner_id":"7","width":"1140","height":"380","status":"1"}'),
+(30, 'Баннер Категория', 'banner', '{"name":"Баннер Категория","banner_id":"6","width":"182","height":"182","status":"1"}'),
+(29, 'Карусель Главная', 'carousel', '{"name":"Карусель Главная","banner_id":"8","width":"130","height":"100","status":"1"}'),
+(28, 'Рекомендуемые Главная', 'featured', '{"name":"Рекомендуемые Главная","product":["43","40","42","30"],"limit":"4","width":"200","height":"200","status":"1"}'),
+(27, 'Слайдшоу Главная', 'slideshow', '{"name":"Слайдшоу Главная","banner_id":"7","width":"1140","height":"380","status":"1"}'),
 (31, 'Баннер', 'banner', '{"name":"Баннер","banner_id":"6","width":"182","height":"182","status":"1"}');
 -- --------------------------------------------------------
 --

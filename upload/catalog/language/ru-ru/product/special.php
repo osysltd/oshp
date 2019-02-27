@@ -3,7 +3,7 @@
 $_['heading_title']     = 'Акции';
 
 // Text
-$_['text_empty']        = 'Нет товаров по акции.';
+$_['text_no_results']   = 'Нет товаров по акции.';
 $_['text_quantity']     = 'Количество:';
 $_['text_manufacturer'] = 'Производитель:';
 $_['text_model']        = 'Модель:';
