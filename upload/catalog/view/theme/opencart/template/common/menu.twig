@@ -1,0 +1,27 @@
+{% if categories %}
+  <ul class="list-inline">
+    <li class="dropdown nav-item list-inline-item">
+      <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ text_category }}
+      </button>
+      <ul class="dropdown-menu">
+        {% for category in categories %}
+          {% if category.children %}
+            <li><a href="{{ category.href }}" class="dropdown-item dropdown-toggle nav-link" aria-haspopup="true" >{{ category.name }}</a>
+              <ul class="dropdown-menu">
+                {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                  {% for child in children %}
+                    <li><a href="{{ child.href }}" class="dropdown-item nav-link">{{ child.name }}</a></li>
+                    {% endfor %}
+                {% endfor %}
+                <li><a href="{{ category.href }}" class="dropdown-item nav-link see-all">{{ text_all }} {{ category.name }}</a></li>
+              </ul>
+            </li>
+          {% else %}
+            <li><a href="{{ category.href }}" class="dropdown-item nav-link">{{ category.name }}</a></li>
+            {% endif %}
+          {% endfor %}
+      </ul>
+    </li>
+  </ul>
+{% endif %}

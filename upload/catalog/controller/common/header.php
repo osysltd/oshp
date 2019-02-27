@@ -71,7 +71,20 @@ class ControllerCommonHeader extends Controller {
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');
-
+		
+		#mod informations
+		$data['special'] = $this->url->link('product/special', 'language=' . $this->config->get('config_language'));
+		$data['address'] = nl2br($this->config->get('config_address'));
+		$data['informations'] = array();
+		foreach ($this->model_catalog_information->getInformations() as $result) {
+			if (!$result['bottom']) {
+				$data['informations'][] = array(
+						'title' => $result['title'],
+						'href' => $this->url->link('information/information', 'language=' . $this->config->get('config_language') . '&information_id=' . $result['information_id'])
+				);
+			}
+		}
+		
 		return $this->load->view('common/header', $data);
 	}
 }

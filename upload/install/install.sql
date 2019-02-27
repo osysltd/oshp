@@ -955,6 +955,7 @@ CREATE TABLE `oc_customer_ip` (
   `customer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
+  `country` CHAR(2) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`),
