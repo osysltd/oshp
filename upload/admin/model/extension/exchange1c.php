@@ -1273,7 +1273,7 @@ class ModelExtensionExchange1c extends Model {
 			$query = $this->query($sql);
 			if ($query->num_rows) {
 				foreach ($query->rows as $data) {
-
+					//$this->log($data, 3); #mod logging
 					$result['product']++;
 	 				$data_old = $data;
 	 				if ($this->config->get('exchange1c_seo_product_mode') != 'disable')
@@ -1285,7 +1285,7 @@ class ModelExtensionExchange1c extends Model {
 					// Сравнение
 					$no_update = array('sku','model','manufacturer_id');
 					$update_fields = $this->compareArraysData($data_old, $data, $no_update);
-
+					//$this->log($update_fields, 3); #mod logging
 					// Если есть что обновлять
 					if ($update_fields) {
 						$sql_set = $this->prepareQuery($update_fields, 'set');
@@ -1293,8 +1293,8 @@ class ModelExtensionExchange1c extends Model {
 					}
 
 					// Сравнение
-					$update_fields = $this->compareArraysData($data_old, $data, $no_update_description);
-
+					$update_fields = $this->compareArraysData($update, $data_old, $no_update_description);
+					$this->log($update_fields, 3); #mod logging
 					// Если есть что обновлять
 					if ($update_fields) {
 						$sql_set = $this->prepareQuery($update_fields, 'set');
