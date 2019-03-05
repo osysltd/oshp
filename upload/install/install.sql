@@ -4469,7 +4469,7 @@ DROP TABLE IF EXISTS `oc_seo_url`;
 CREATE TABLE `oc_seo_url` (
   `seo_url_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL DEFAULT '1',
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   `push` varchar(255) NOT NULL,
@@ -4481,11 +4481,11 @@ CREATE TABLE `oc_seo_url` (
   CONSTRAINT `seo_url_store_fk`
 	FOREIGN KEY (`store_id`)
 	REFERENCES `oc_store`(`store_id`)
-	ON UPDATE CASCADE ON DELETE CASCADE
-  /* CONSTRAINT `seo_url_language_fk`
+	ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `seo_url_language_fk`
 	FOREIGN KEY (`language_id`)
 	REFERENCES `oc_language`(`language_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT */
+	ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 --
 -- Dumping data for table `oc_seo_url`
