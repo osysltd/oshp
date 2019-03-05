@@ -5,14 +5,14 @@ OpenCart is a ecommerce platform for online merchants. OpenCart provides a profe
 This development branch is originated from [OpenCart master branch](https://github.com/opencart/opencart/).
 
 ## Features
-
 * InnoDB: ```on delete``` and ```on update```
 * Foreign Key: ```user_id```
-* Global permissions: ```$this->user->hasPermission('modify', 'setting/setting')```
 * Additional MySQL database indexes
+* Integration with 1c based on [Exchange1c](https://github.com/KirilLoveVE/opencart2-exchange1c)
+* Themes
 
 ## TODO
-
+* Multi-user stores using global permissions: ```$this->user->hasPermission('modify', 'setting/setting')```
 * Fix CORS header ```Access-Control-Allow-Origin``` missing for shop admin page of non-primary domains
 * Implement per-user extensions
 * Switch to per-user dashboard
