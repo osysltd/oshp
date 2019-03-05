@@ -110,12 +110,12 @@ div.required .col-form-label:before {
     text-shadow: 0 1px 0 #fff; }
   
   
-#wishlist-total {display: inline-block}
+/* #wishlist-total {display: inline-block} */
 
 /* cart */
 #cart {
   margin-bottom: 10px;
-  display: inline-block;
+  /* display: inline-block; */
 }
   #cart > .btn {
     font-size: 12px;
