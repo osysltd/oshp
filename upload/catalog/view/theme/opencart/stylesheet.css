@@ -108,9 +108,15 @@ div.required .col-form-label:before {
     line-height: 18px;
     padding: 0.57rem 35px;
     text-shadow: 0 1px 0 #fff; }
+  
+  
+#wishlist-total {display: inline-block}
+
 /* cart */
 #cart {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  display: inline-block;
+}
   #cart > .btn {
     font-size: 12px;
     line-height: 18px;

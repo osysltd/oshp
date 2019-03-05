@@ -1,8 +1,9 @@
 {% if categories %}
   <ul class="list-inline">
-    <li class="dropdown nav-item list-inline-item">
-      <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ text_category }}
+    <li class="dropdown nav-item list-inline-item btn-block">
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+	{{ text_category }}
       </button>
       <ul class="dropdown-menu">
         {% for category in categories %}

@@ -75,10 +75,11 @@
 	  <li class="list-inline-item"><a href="{{ login }}" title="{{ text_login }}"><i class="fas fa-door-open"></i> <span class="d-none d-md-inline">{{ text_login }}</span></a></li>
 	  <li class="list-inline-item"><a href="{{ register }}" title="{{ text_register }}"><i class="fas fa-user-plus"></i> <span class="d-none d-md-inline">{{ text_register }}</span></li>
 	{% endif %}
-	
-        <li class="list-inline-item"><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fas fa-heart"></i> <span class="d-none d-md-inline">{{ text_wishlist }}</span></a></li>
+        <!-- 
+	<li class="list-inline-item"><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fas fa-heart"></i> <span class="d-none d-md-inline">{{ text_wishlist }}</span></a></li>
         <li class="list-inline-item"><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fas fa-shopping-cart"></i> <span class="d-none d-md-inline">{{ text_shopping_cart }}</span></a></li>
         <li class="list-inline-item"><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fas fa-share"></i> <span class="d-none d-md-inline">{{ text_checkout }}</span></a></li>
+	-->
       </ul>
     </div>
   </div>
@@ -96,12 +97,17 @@
         </div>
       </div>
       <div class="col-md-5" style="font-size: 1.2em;">
-	<ul class="list-inline" style="margin-bottom: 5px">
-	    <li class="list-inline-item"><a href="{{ contact }}"><i class="fas fa-address-card"></i></a> <span class="inline">{{ telephone }}</span></li>
+	<ul style="margin-bottom: 5px; list-style: none">
+	  <li>{{ telephone }}</li>
+	  <li><a href="{{ contact }}"><i class="fas fa-address-card"></i></a> <span class="inline">{{ address }}</span></li>
 	</ul>
-	{{ address }}
       </div>
-      <div class="col-md-4 col-lg-3">{{ cart }}</div>
+      <div class="col-md-4 col-lg-3">
+	<a class="btn btn-primary" href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
+	  <i class="fas fa-heart"></i> <span class="d-none d-md-inline">{{ text_wishlist }}</span>
+	</a>
+	  {{ cart }}
+      </div>
     </div>
 
     <div class="row">
