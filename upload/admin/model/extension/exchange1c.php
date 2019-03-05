@@ -4882,9 +4882,11 @@ class ModelExtensionExchange1c extends Model {
 				$this->parseRequisite($product->ЗначенияРеквизитов, $data);
 			}
 
-			// МОДЕЛЬ
+			// МОДЕЛЬ #mod Если пусто то пишем артикул из 1с
 			if ($product->Модель) {
-				$data['model'] = htmlspecialchars(trim((string)$product->Модель));
+				$data['model'] = htmlspecialchars(trim((string) $product->Модель));
+			} elseif ($product->Артикул) {
+				$data['model'] = htmlspecialchars(trim((string) $product->Артикул));
 			}
 
 			// НАИМЕНОВАНИЕ
@@ -8339,7 +8341,7 @@ class ModelExtensionExchange1c extends Model {
 			if ($this->ERROR) return $this->error();
 			unset($xml->ПакетПредложений);
 		}
-
+		// #mod Добавлена загрузка краткого пакета предлождений
 		elseif ($xml->ИзмененияПакетаПредложений) {
 			$this->log("~ЗАГРУЗКА КРАТКОГО ПАКЕТА ПРЕДЛОЖЕНИЙ", 2);
 			// Пакет предложений
