@@ -932,7 +932,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 
 		$this->load->model('setting/setting');
 		$settings['exchange1c_version'] 					= $module_version;
-		$settings['exchange1c_name'] 						= 'Exchange 1C 8.x for OpenCart 2.x';
+		$settings['exchange1c_name'] 						= 'Exchange 1C 8.x for OpenCart';
 		$settings['exchange1c_CMS_version']					= VERSION;
 		$settings['exchange1c_seo_category_name'] 			= '[category_name]';
 		$settings['exchange1c_seo_parent_category_name'] 	= '[parent_category_name]';
@@ -1145,6 +1145,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`guid` 						VARCHAR(64) 	NOT NULL,
 				PRIMARY KEY (`product_feature_id`),
 				UNIQUE KEY `product_feature_key` (`product_id`, `guid`),
+				FOREIGN KEY (`product_id`) 	REFERENCES `" . DB_PREFIX . "product`(`product_id`),
 				INDEX (`product_id`)
 			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
 		);
@@ -1257,8 +1258,8 @@ class ControllerExtensionModuleExchange1c extends Controller {
 		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "option_to_product`");
 		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "option_to_1c`");
 		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "product_to_1c`");
-		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "product_feature`");
 		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "product_feature_value`");
+		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "product_feature`");
 		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "attribute_value`");
 		$query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "product_category`");
 

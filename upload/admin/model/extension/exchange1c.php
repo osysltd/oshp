@@ -878,7 +878,7 @@ class ModelExtensionExchange1c extends Model {
 		if ($split) {
 			$seo_string = $this->getKeywordString($seo_string);
 		}
-		return $seo_string;
+		return 	str_replace('&quot;', '', $seo_string); #mod убираем кавычки
 
 	} // seoGenerateString()
 
@@ -1246,7 +1246,9 @@ class ModelExtensionExchange1c extends Model {
 	 * Генерит SEO переменные шаблона для товара
 	 */
 	public function seoGenerate() {
-
+		// #mod Определение дополнительных полей
+		$this->TAB_FIELDS = $this->config->get('exchange1c_table_fields');
+		
         $now = date('Y-m-d H:i:s');
 		$result = array(
 			'error'			=> '',
