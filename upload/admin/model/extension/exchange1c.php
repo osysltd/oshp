@@ -776,6 +776,7 @@ class ModelExtensionExchange1c extends Model {
 
 		} else {
 
+			//todo: select case
 			$this->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET `query` = '" . $url_type . "=" . $element_id ."', `keyword` = '" . $this->db->escape($keyword) . "'");
 
 		}
@@ -1056,7 +1057,7 @@ class ModelExtensionExchange1c extends Model {
 				$data[$field] = "";
 			}
 
-			if ($this->config->get('exchange1c_seo_product_'.$field) == 'template') {
+			if ($this->config->get('exchange1c_seo_category_'.$field) == 'template') {
 				// Если включено формирование по шаблону
 
 				$template = $this->config->get('exchange1c_seo_category_'.$field.'_template');
@@ -1095,7 +1096,6 @@ class ModelExtensionExchange1c extends Model {
 				}
 
 			} else {
-
 				// Не изменяем это поле
 				unset($data[$field]);
 				continue;
@@ -1120,7 +1120,7 @@ class ModelExtensionExchange1c extends Model {
 
 		$this->log("Сформировано SEO для категории");
 
-	} // seoGenerateCategory()
+		} // seoGenerateCategory()
 
 
 	/**
@@ -1273,7 +1273,7 @@ class ModelExtensionExchange1c extends Model {
 			$query = $this->query($sql);
 			if ($query->num_rows) {
 				foreach ($query->rows as $data) {
-					//$this->log($data, 3); #mod logging
+
 					$result['product']++;
 	 				$data_old = $data;
 	 				if ($this->config->get('exchange1c_seo_product_mode') != 'disable')
@@ -1285,7 +1285,7 @@ class ModelExtensionExchange1c extends Model {
 					// Сравнение
 					$no_update = array('sku','model','manufacturer_id');
 					$update_fields = $this->compareArraysData($data_old, $data, $no_update);
-					//$this->log($update_fields, 3); #mod logging
+
 					// Если есть что обновлять
 					if ($update_fields) {
 						$sql_set = $this->prepareQuery($update_fields, 'set');
@@ -1294,7 +1294,7 @@ class ModelExtensionExchange1c extends Model {
 
 					// Сравнение
 					$update_fields = $this->compareArraysData($update, $data_old, $no_update_description);
-					$this->log($update_fields, 3); #mod logging
+
 					// Если есть что обновлять
 					if ($update_fields) {
 						$sql_set = $this->prepareQuery($update_fields, 'set');
@@ -1314,7 +1314,7 @@ class ModelExtensionExchange1c extends Model {
 				$sql = "SELECT `c`.`category_id`, `cd`.`name`, `cd`.`meta_title`, `cd`.`meta_description`, `cd`.`meta_keyword`, `cd`.`meta_h1` FROM `" . DB_PREFIX . "category` `c` LEFT JOIN `" . DB_PREFIX . "category_description` `cd` ON (`c`.`category_id` = `cd`.`category_id`) WHERE `cd`.`language_id` = " . $language_id;
 			} else {
 				$sql = "SELECT `c`.`category_id`, `cd`.`name`, `cd`.`meta_title`, `cd`.`meta_description`, `cd`.`meta_keyword` FROM `" . DB_PREFIX . "category` `c` LEFT JOIN `" . DB_PREFIX . "category_description` `cd` ON (`c`.`category_id` = `cd`.`category_id`) WHERE `cd`.`language_id` = " . $language_id;
-				array_push($no_update_description, 'meta_h1');
+				array_push($no_update_description, 'meta_h1', 'category_id', 'name'); #mod skip updates
 			}
 
 			$query = $this->query($sql);
@@ -1322,11 +1322,12 @@ class ModelExtensionExchange1c extends Model {
 				foreach ($query->rows as $data) {
 
 					$result['category']++;
+					$data_old = $data;
 					if ($this->config->get('exchange1c_seo_category_mode') != 'disable')
-						$this->seoGenerateCategory($data['category_id'], $data);
+						$this->seoGenerateCategory($data['category_id'], $data); #mod fixes
 
-					// Сравнение
-					$update_fields = $this->compareArraysData($data_old, $data, $no_update_description);
+					// Сравнение #mod
+					$update_fields = $this->compareArraysData($data, $data_old, $no_update_description);
 
 					// Если есть что обновлять
 					if ($update_fields) {
@@ -7806,7 +7807,7 @@ class ModelExtensionExchange1c extends Model {
 		$this->query("INSERT INTO `" . DB_PREFIX . "category_to_1c` SET `category_id` = '" . (int)$category_id . "', `guid` = '" . $this->db->escape($data['guid']) . "', `version` = '" . $this->db->escape($data['version']) . "'");
 
 		if (isset($data['keyword'])) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'path=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "', push = '" . $this->db->escape('route=product/category&path=' . (int)$category_id) . "'");
 		}
 
 		// Магазин

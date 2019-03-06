@@ -4561,7 +4561,8 @@ INSERT INTO `oc_seo_url` (`store_id`, `language_id`, `query`, `keyword`, `push`)
 (0, 1, 'route=product/product', '', ''),
 (0, 1, 'route=product/manufacturer', 'brands', 'route=product/manufacturer'),
 (0, 1, 'route=product/manufacturer/info', '', ''),
-(0, 1, 'manufacturer_id=', 'brands', '');
+(0, 1, 'manufacturer_id=', 'brands', ''),
+(0, 1, 'language=ru-ru', '', 'language=ru-ru');
 -----------------------------------------------------------
 --
 -- Table structure for tables `oc_session`
