@@ -776,9 +776,21 @@ class ModelExtensionExchange1c extends Model {
 
 		} else {
 
-			//todo: select case
-			$this->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET `query` = '" . $url_type . "=" . $element_id ."', `keyword` = '" . $this->db->escape($keyword) . "'");
+			switch ($url_type) {
+				case 'category_id':
+					$path = $this->getPath((int)$element_id);
+					//$this->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET `query` = '" . $url_type . "=" . (int)$element_id . "', `keyword` = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/category&path=' . (int)$element_id) . "'");
+					$this->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'path=" . $this->db->escape($path) . "', keyword = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/category&path=' . $path) . "'");
+					break;
 
+				case 'product_id':
+					$this->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET `query` = '" . $url_type . "=" . (int)$element_id . "', `keyword` = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/product&product_id=' . (int)$element_id) . "'");
+					break;
+
+				case 'manufacturer_id':
+					$this->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET `query` = '" . $url_type . "=" . (int)$element_id . "', `keyword` = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/manufacturer/info&manufacturer_id=' . (int)$element_id) . "'");
+					break;
+			}
 		}
 
 	} // setSeoURL()
@@ -8525,7 +8537,16 @@ class ModelExtensionExchange1c extends Model {
 
 	} // checkUpdates()
 
+	public function getCategoryPath($category_id) {
+		$query = $this->db->query("SELECT category_id, path_id, level FROM " . DB_PREFIX . "category_path WHERE category_id = '" . (int)$category_id . "' ORDER BY level ASC");
 
+		return $query->rows;
+	}
+	
+		public function getPath($category_id) {
+		return implode('_', array_column($this->getCategoryPath($category_id), 'path_id'));
+	}
+	
 	/**
 	 * Обновление до версии 1.6.4.2
 	 */
