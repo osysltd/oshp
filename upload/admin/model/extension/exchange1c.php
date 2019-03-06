@@ -718,7 +718,9 @@ class ModelExtensionExchange1c extends Model {
    			'seo_url_id'	=> 0,
    			'keyword'		=> ""
 		);
+		//todo select case
 		$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` = '" . $element . "=" . (string)$id . "'");
+
     	if ($query->num_rows) {
     		$result = array(
     			'seo_url_id'	=> $query->row['seo_url_id'],
@@ -750,7 +752,22 @@ class ModelExtensionExchange1c extends Model {
 
 		// Получим все названия начинающиеся на $element_name
 		$keywords = array();
-		$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> '" . $url_type . "=" . $element_id . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
+		//$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> '" . $url_type . "=" . $element_id . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
+			switch ($url_type) {
+				case 'path':
+					$path = $this->getPath((int)$element_id);
+					$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> 'path=" . $this->db->escape($path) . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
+					break;
+
+				case 'product_id':
+					$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> '" . $url_type . "=" . (int)$element_id . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
+					break;
+
+				case 'manufacturer_id':
+					$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> '" . $url_type . "=" . (int)$element_id . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
+					break;
+			}		
+		
 		foreach ($query->rows as $row) {
 			$keywords[$row['seo_url_id']] = $row['keyword'];
 		}
@@ -777,10 +794,9 @@ class ModelExtensionExchange1c extends Model {
 		} else {
 
 			switch ($url_type) {
-				case 'category_id':
+				case 'path':
 					$path = $this->getPath((int)$element_id);
-					//$this->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET `query` = '" . $url_type . "=" . (int)$element_id . "', `keyword` = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/category&path=' . (int)$element_id) . "'");
-					$this->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'path=" . $this->db->escape($path) . "', keyword = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/category&path=' . $path) . "'");
+					$this->query("INSERT INTO " . DB_PREFIX . "seo_url SET `query` = 'path=" . $this->db->escape($path) . "', keyword = '" . $this->db->escape($keyword) . "', push = '" . $this->db->escape('route=product/category&path=' . $path) . "'");
 					break;
 
 				case 'product_id':
@@ -1120,12 +1136,12 @@ class ModelExtensionExchange1c extends Model {
 			$keyword = $this->seoGenerateString($template, $tags, true);
 
 			// Получим старый SeoUrl
-			$seo_url = $this->getSeoUrl("category_id", $category_id);
+			$seo_url = $this->getSeoUrl("path", $category_id);
 
 			// обновляем если только были изменения
 			if ($this->config->get('exchange1c_seo_category_mode') == 'overwrite' || ($this->config->get('exchange1c_seo_category_mode') == 'if_empty' && empty($seo_url['keyword']))) {
 				if ($seo_url['keyword'] != $keyword) {
-					$this->setSeoURL('category_id', $category_id, $keyword, $seo_url);
+					$this->setSeoURL('path', $category_id, $keyword, $seo_url);
 				}
 			}
 		}
