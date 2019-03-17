@@ -718,10 +718,24 @@ class ModelExtensionExchange1c extends Model {
    			'seo_url_id'	=> 0,
    			'keyword'		=> ""
 		);
-		//todo select case
-		$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` = '" . $element . "=" . (string)$id . "'");
+		//#mod $query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` = '" . $element . "=" . (string)$id . "'");
 
-    	if ($query->num_rows) {
+			switch ($element) {
+			case 'path':
+				$path = $this->getPath((int)$id);
+				$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` = 'path=" . $this->db->escape($path) . "'");
+				break;
+
+			case 'product_id':
+				$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` = '" . $element . "=" . (string)$id . "'");
+				break;
+
+			case 'manufacturer_id':
+				$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` = '" . $element . "=" . (string)$id . "'");
+				break;
+		}
+
+		if ($query->num_rows) {
     		$result = array(
     			'seo_url_id'	=> $query->row['seo_url_id'],
     			'keyword'		=> $query->row['keyword'] . $last_symbol
@@ -752,7 +766,7 @@ class ModelExtensionExchange1c extends Model {
 
 		// Получим все названия начинающиеся на $element_name
 		$keywords = array();
-		//$query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> '" . $url_type . "=" . $element_id . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
+		//#mod $query = $this->query("SELECT `seo_url_id`,`keyword` FROM `" . DB_PREFIX . "seo_url` WHERE `query` <> '" . $url_type . "=" . $element_id . "' AND `keyword` LIKE '" . $this->db->escape($keyword) . "-%'");
 			switch ($url_type) {
 				case 'path':
 					$path = $this->getPath((int)$element_id);
@@ -904,7 +918,8 @@ class ModelExtensionExchange1c extends Model {
 			}
 		}
 		$seo_string = trim(str_replace($matches[0], $values, $template));
-		if ($split) {
+		if ($split) { #mod remove &amp;
+			$seo_string = str_replace('&amp;', '', $seo_string);
 			$seo_string = $this->getKeywordString($seo_string);
 		}
 		return 	str_replace('&quot;', '', $seo_string); #mod убираем кавычки
@@ -1099,7 +1114,11 @@ class ModelExtensionExchange1c extends Model {
 				if ($this->config->get('exchange1c_seo_category_mode') == 'overwrite') {
 					// Перезаписывать
 
-					$value = $this->seoGenerateString($template, $tags);
+					if ($field == 'meta_keyword' || $field == 'meta_description') {
+						$value = $this->seoGenerateString($template, $tags, false, true);
+					} else {
+						$value = $this->seoGenerateString($template, $tags);
+					}
 
 					// Если поле не изменилось, нет смысла его перезаписывать
 					if ($value == $data[$field]) {
