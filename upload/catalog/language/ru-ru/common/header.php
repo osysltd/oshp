@@ -14,4 +14,6 @@ $_['text_logout']        = 'Выход';
 $_['text_checkout']      = 'Оформление заказа';
 $_['text_search']        = 'Поиск';
 $_['text_all']           = 'Смотреть Все';
+//Callback
+$_['text_callback']      = 'Заказать звонок';
 

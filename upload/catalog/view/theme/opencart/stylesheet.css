@@ -588,6 +588,11 @@ footer {
 /* fixed product layouts used in left and right columns */
 #column-left .product-layout, #column-right .product-layout {
   width: 100%; }
+#column-left .product-layout {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
 /* BS4 Changes */
 .navbar-light .navbar-toggler {
   font-size: 15px;
