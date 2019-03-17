@@ -11,6 +11,7 @@ This development branch is originated from [OpenCart master branch](https://gith
 * Integration with 1c based on [Exchange1c](https://github.com/KirilLoveVE/opencart2-exchange1c/commit/39a8106f39f2abfd0a88ddf98df0864ecec092e0)
 * More themes
 * Full Russian localisation
+* Yandex Metrika Analytics
 
 ## TODO
 * Multi-user stores using global permissions: ```$this->user->hasPermission('modify', 'setting/setting')```
