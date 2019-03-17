@@ -592,6 +592,7 @@ footer {
   max-width: 100%;
   flex: 0 0 100%;
 }
+#column-left h3 {text-align: center;}
 
 /* BS4 Changes */
 .navbar-light .navbar-toggler {
