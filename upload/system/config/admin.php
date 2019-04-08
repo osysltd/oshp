@@ -12,7 +12,7 @@ $_['db_database']       = DB_DATABASE;
 $_['db_port']           = DB_PORT;
 
 // Session
-$_['session_autostart'] = true;
+$_['session_autostart'] = false;
 $_['session_engine']    = 'db';
 
 // Error
@@ -32,10 +32,10 @@ $_['action_pre_action'] = array(
 );
 
 // Actions
-$_['action_default'] = 'common/dashboard';
+$_['action_default']    = 'common/dashboard';
 
 // Action Events
-$_['action_event'] = array(
+$_['action_event']      = array(
 	'controller/*/before' => array(
 		'event/language/before'
 	),
