@@ -1035,6 +1035,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`version` 					VARCHAR(32) 	NOT NULL,
 				UNIQUE KEY `product_link` (`product_id`, `guid`),
 				FOREIGN KEY (`product_id`) 				REFERENCES `". DB_PREFIX ."product`(`product_id`)
+				ON UPDATE CASCADE ON DELETE CASCADE
 			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
 		);
 
@@ -1047,6 +1048,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 				`version` 					VARCHAR(32) 	NOT NULL,
 				UNIQUE KEY `category_link` (`category_id`,`guid`),
 				FOREIGN KEY (`category_id`) 			REFERENCES `". DB_PREFIX ."category`(`category_id`)
+				ON UPDATE CASCADE ON DELETE CASCADE
 			) COMMENT='exchange1c' ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci"
 		);
 
