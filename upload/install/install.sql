@@ -842,6 +842,7 @@ CREATE TABLE `oc_customer` (
 --
 INSERT INTO `oc_customer` (`firstname`, `status`) VALUES ('Guest', 1);
 UPDATE `oc_customer` SET `customer_id` = 0 WHERE `firstname` = 'Guest';
+ALTER TABLE `oc_customer` AUTO_INCREMENT = 1;
 --
 -- Table structure for table `oc_customer_activity`
 --
@@ -1684,7 +1685,7 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 (11, '_Информация'),
 (12, '_Сравнение'),
 (13, '_Поиск'),
-(14, '');
+(14, '_Не определено');
 UPDATE `oc_layout` SET `layout_id` = 0 WHERE `layout_id` = 14;
 ALTER TABLE `oc_layout` AUTO_INCREMENT = 14;
 -- --------------------------------------------------------
@@ -1845,7 +1846,7 @@ INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 (8, 'Apple', 'catalog/demo/apple_logo.jpg', 0),
 (9, 'Canon', 'catalog/demo/canon_logo.jpg', 0),
 (10, 'Sony', 'catalog/demo/sony_logo.jpg', 0),
-(11, '', '', 0);
+(11, 'Default', '', 0);
 UPDATE `oc_manufacturer` SET `manufacturer_id` = 0 WHERE `manufacturer_id` = 11;
 ALTER TABLE `oc_manufacturer` AUTO_INCREMENT = 11;
 -- --------------------------------------------------------
@@ -2189,11 +2190,11 @@ CREATE TABLE `oc_order` (
 	FOREIGN KEY (`shipping_zone_id`)
 	REFERENCES `oc_zone`(`zone_id`)
 	ON UPDATE CASCADE ON DELETE RESTRICT,
-  /* CONSTRAINT `order_order_status_fk`
+  CONSTRAINT `order_order_status_fk`
 	FOREIGN KEY (`order_status_id`)
 	REFERENCES `oc_order_status`(`order_status_id`)
 	ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `order_affiliate_fk`
+  /* CONSTRAINT `order_affiliate_fk`
 	FOREIGN KEY (`affiliate_id`)
 	REFERENCES `oc_affiliate`(`affiliate_id`)
 	ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -2228,7 +2229,7 @@ CREATE TABLE `oc_order_history` (
   CONSTRAINT `order_history_order_fk`
 	FOREIGN KEY (`order_id`)
 	REFERENCES `oc_order`(`order_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
+	ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `order_history_order_status_fk`
 	FOREIGN KEY (`order_status_id`)
 	REFERENCES `oc_order_status`(`order_status_id`)
@@ -2391,7 +2392,11 @@ INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 (11, 1, 'Возмещенный'),
 (12, 1, 'Полностью измененный'),
 (13, 1, 'Полный возврат'),
-(14, 1, 'Просрочено');
+(14, 1, 'Просрочено'),
+(15, 1, 'Не определен');
+
+UPDATE `oc_order_status` SET `order_status_id` = 0 WHERE `order_status_id` = 15;
+ALTER TABLE `oc_order_status` AUTO_INCREMENT = 15;
 -- --------------------------------------------------------
 --
 -- Table structure for table `oc_order_total`
