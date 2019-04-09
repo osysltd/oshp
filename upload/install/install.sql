@@ -2291,6 +2291,7 @@ CREATE TABLE `oc_order_product` (
   PRIMARY KEY (`order_product_id`),
   INDEX `order_product_order_idx` (`order_id`),
   INDEX `order_product_product_idx` (`product_id`),
+  INDEX `order_product_master_idx` (`master_id`),
   CONSTRAINT `order_product_order_fk`
 	FOREIGN KEY (`order_id`)
 	REFERENCES `oc_order`(`order_id`)
