@@ -294,7 +294,7 @@ CREATE TABLE `oc_cart` (
   CONSTRAINT `cart_customer_fk`
 	FOREIGN KEY (`customer_id`)
 	REFERENCES `oc_customer`(`customer_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
+	ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `cart_product_fk`
 	FOREIGN KEY (`product_id`)
 	REFERENCES `oc_product`(`product_id`)

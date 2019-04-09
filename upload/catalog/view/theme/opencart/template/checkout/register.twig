@@ -1,3 +1,4 @@
+{% set zone_id = 106 %}
 <div class="row">
   <div class="col-sm-6">
     <fieldset id="account">
@@ -134,13 +135,13 @@
         <label class="col-form-label" for="input-payment-company">{{ entry_company }}</label> <input type="text" name="company" value="" placeholder="{{ entry_company }}" id="input-payment-company" class="form-control"/>
       </div>
       <div class="form-group required">
-        <label class="col-form-label" for="input-payment-address-1">{{ entry_address_1 }}</label> <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}" id="input-payment-address-1" class="form-control"/>
+        <label class="col-form-label" for="input-payment-address-1">{{ entry_address_1 }}</label> <input type="text" name="address_1" value="Санкт-Петербург" placeholder="{{ entry_address_1 }}" id="input-payment-address-1" class="form-control"/>
       </div>
       <div class="form-group" style="display: none;">
         <label class="col-form-label" for="input-payment-address-2">{{ entry_address_2 }}</label> <input type="text" name="address_2" value="" placeholder="{{ entry_address_2 }}" id="input-payment-address-2" class="form-control"/>
       </div>
       <div class="form-group required">
-        <label class="col-form-label" for="input-payment-city">{{ entry_city }}</label> <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-payment-city" class="form-control"/>
+        <label class="col-form-label" for="input-payment-city">{{ entry_city }}</label> <input type="text" name="city" value="Санкт-Петербург" placeholder="{{ entry_city }}" id="input-payment-city" class="form-control"/>
       </div>
       <div class="form-group" style="display: none;">
         <label class="col-form-label" for="input-payment-postcode">{{ entry_postcode }}</label> <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-payment-postcode" class="form-control"/>
