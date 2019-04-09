@@ -67,6 +67,8 @@ div.required .col-form-label:before {
   min-height: 44px; }
   #top .nav > .list-inline > .list-inline-item, #top .nav > .list-inline .list-inline-item a {
     color: white; }
+  #top .nav > .list-inline > .list-inline-item a.dropdown-item {
+    color: black; }
   #top .btn-link {
     color: #888;
     text-shadow: 0 1px 0 #fff;
@@ -665,5 +667,3 @@ footer {
 /* Font Awesome fixes */
 .swiper-button-next:before { font-weight: 900; }
 .swiper-button-prev:before { font-family: "Font Awesome 5 Free" !important; font-weight: 900; }
-
-/* Checkout fixes */
