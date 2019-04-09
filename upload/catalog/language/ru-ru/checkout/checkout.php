@@ -5,7 +5,7 @@ $_['heading_title']                  = 'Оформление заказа';
 // Text
 $_['text_cart']                      = 'Корзина покупок';
 $_['text_checkout_option']           = 'Шаг %s: Способ оформления заказа';
-$_['text_checkout_account']          = 'Шаг %s: Профиль &amp; Платежная информация';
+$_['text_checkout_account']          = 'Шаг %s: Профиль и Платежная информация';
 $_['text_checkout_payment_address']  = 'Шаг %s: Платежная информация';
 $_['text_checkout_shipping_address'] = 'Шаг %s: Адрес доставки';
 $_['text_checkout_shipping_method']  = 'Шаг %s: Способ доставки';
@@ -59,12 +59,12 @@ $_['entry_address']                  = 'Выберите адрес';
 $_['entry_company']                  = 'Компания';
 $_['entry_customer_group']           = 'Тип бизнеса';
 $_['entry_address_1']                = 'Адрес';
-$_['entry_address_2']                = 'Адрес 2';
+$_['entry_address_2']                = 'Дополнительный адрес';
 $_['entry_postcode']                 = 'Индекс';
 $_['entry_city']                     = 'Город';
 $_['entry_country']                  = 'Страна';
 $_['entry_zone']                     = 'Регион / Область';
-$_['entry_newsletter']               = 'Я хочу подписаться на Новости %s .';
+$_['entry_newsletter']               = 'Я хочу подписаться на Новости %s.';
 $_['entry_shipping']                 = 'Мой адрес доставки совпадает с платежным.';
 
 // Error

@@ -624,13 +624,17 @@ footer {
   font-family: 'Font Awesome 5 Free';
   font-size: 14px;
   content: "\f0d7  ";
-  margin-right: 10px; }
+  margin-right: 10px;
+  font-weight: 900;
+}
 
 #checkout-cart #accordion h4.collapsed:before {
   font-family: 'Font Awesome 5 Free';
   font-size: 14px;
   content: "\f0da";
-  margin-right: 10px; }
+  margin-right: 10px;
+  font-weight: 900;
+}
 
 #checkout-checkout #accordion h4 {
   cursor: pointer; }
@@ -639,13 +643,17 @@ footer {
   font-family: 'Font Awesome 5 Free';
   font-size: 14px;
   content: "\f0d7  ";
-  margin-right: 10px; }
+  margin-right: 10px;
+  font-weight: 900;
+}
 
 #checkout-checkout #accordion h4.collapsed:before {
   font-family: 'Font Awesome 5 Free';
   font-size: 14px;
   content: "\f0da";
-  margin-right: 10px; }
+  margin-right: 10px;
+  font-weight: 900;  
+}
 
 #product-product h1 {
   margin-top: 20px;
@@ -653,3 +661,9 @@ footer {
 
 #information-contact .card {
   margin-bottom: 20px; }
+
+/* Font Awesome fixes */
+.swiper-button-next:before { font-weight: 900; }
+.swiper-button-prev:before { font-family: "Font Awesome 5 Free" !important; font-weight: 900; }
+
+/* Checkout fixes */
