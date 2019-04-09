@@ -2280,6 +2280,7 @@ CREATE TABLE `oc_order_product` (
   `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `master_id` int(11) NULL DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `model` varchar(64) NOT NULL,
   `quantity` int(4) NOT NULL,
@@ -2296,6 +2297,10 @@ CREATE TABLE `oc_order_product` (
 	ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `order_product_product_fk`
 	FOREIGN KEY (`product_id`)
+	REFERENCES `oc_product`(`product_id`)
+	ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `order_product_master_fk`
+	FOREIGN KEY (`master_id`)
 	REFERENCES `oc_product`(`product_id`)
 	ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
