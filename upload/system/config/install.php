@@ -14,7 +14,6 @@ $_['session_name']      = 'OCSESSID';
 
 // Template
 $_['template_engine']   = 'twig';
-$_['template_cache']    = true;
 
 // Error
 $_['error_display']     = true;
@@ -30,8 +29,4 @@ $_['action_pre_action'] = array(
 );
 
 // Action Events
-$_['action_event'] = array(
-    'view/*/before' => array(
-		'event/theme'
-	)
-);
+$_['action_event'] = array();
