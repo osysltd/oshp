@@ -30,6 +30,7 @@ $_['text_payment_cancel']      = 'Стоимость: %s; Периодичнос
 $_['column_image']             = 'Изображение';
 $_['column_name']              = 'Название';
 $_['column_model']             = 'Модель';
+$_['column_sku']               = 'Артикул';
 $_['column_quantity']          = 'Количество';
 $_['column_price']             = 'Цена за шт.';
 $_['column_total']             = 'Всего';
