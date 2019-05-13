@@ -10,6 +10,7 @@ This development branch is originated from [OpenCart master branch](https://gith
 * Additional MySQL database indexes
 * Synchronization with 1c based on [Exchange1c](https://github.com/KirilLoveVE/opencart2-exchange1c/commit/39a8106f39f2abfd0a88ddf98df0864ecec092e0)
 * Yandex payment system based on [Y.CMS](https://github.com/yandex-money/yandex-money-ycms-opencart3/commit/967b7b62e1681519f8a153ac4e528a9a5449f924)
+* Paykeeper payment system based on [Paykeeper OpenCart module](https://docs.paykeeper.ru/cms/)
 * Yandex Metrika Analytics module
 * Full Russian localization
 * More themes
