@@ -8,7 +8,7 @@
           <ul class="list-unstyled">
             {% for information in informations %}
               <li><a href="{{ information.href }}">{{ information.title }}</a></li>
-            {% endfor %}
+	      {% endfor %}
           </ul>
         </div>
       {% endif %}
@@ -39,6 +39,13 @@
           <li><a href="{{ order }}">{{ text_order }}</a></li>
           <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
           <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+	  <li><br/></li>
+          <li>
+	    <a href="https://vk.com/soyuzmarket" targe="_blank"><img src="/catalog/view/theme/opencart/image/vk.png" style="height:35px"></a>
+	    <a href="https://www.instagram.com/soyuz_market/" targe="_blank"><img src="/catalog/view/theme/opencart/image/instagram.png" style="height:35px"></a>
+	  </li>
+	  <li><br/></li>
+	  <li><img src="/catalog/view/theme/opencart/image/cards.png" style="height:35px"></li>
         </ul>
       </div>
     </div>

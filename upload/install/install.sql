@@ -2182,14 +2182,14 @@ CREATE TABLE `oc_order` (
 	FOREIGN KEY (`payment_zone_id`)
 	REFERENCES `oc_zone`(`zone_id`)
 	ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `order_shipping_country_fk`
+  /** CONSTRAINT `order_shipping_country_fk`
 	FOREIGN KEY (`shipping_country_id`)
 	REFERENCES `oc_country`(`country_id`)
 	ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `order_shipping_zone_fk`
 	FOREIGN KEY (`shipping_zone_id`)
 	REFERENCES `oc_zone`(`zone_id`)
-	ON UPDATE CASCADE ON DELETE RESTRICT,
+	ON UPDATE CASCADE ON DELETE RESTRICT, **/
   CONSTRAINT `order_order_status_fk`
 	FOREIGN KEY (`order_status_id`)
 	REFERENCES `oc_order_status`(`order_status_id`)
@@ -2556,7 +2556,11 @@ INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `is
 (46, 'Product 19', '', '', '', '', '', '', '', 1000, 5, 'catalog/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:29', '2011-09-30 01:06:39'),
 (47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'catalog/demo/hp_1.jpg', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, 0, '2009-02-03 21:08:40', '2011-09-30 01:05:28'),
 (48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'catalog/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-08 17:21:51', '2011-09-30 01:07:06'),
-(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'catalog/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23');
+(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'catalog/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23'),
+(50, 'Default Master', NULL, '', '', '', '', '', '', '', '', '', 0, NULL, NULL, NULL, 0, 0.0000, 0, 0, '2000-01-01', 0.000, 1, 0.00000000, 0.00000000, 0.00000000, 1, 1, 1, 0, 0, 0, '2000-01-01 00:00:00', '2000-01-01 00:00:00');
+
+UPDATE `oc_product` SET `product_id` = 0 WHERE `product_id` = 50;
+ALTER TABLE `oc_product` AUTO_INCREMENT = 50;
 -- --------------------------------------------------------
 --
 -- Table structure for table `oc_product_attribute`
