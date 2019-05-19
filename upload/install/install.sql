@@ -2479,7 +2479,7 @@ CREATE TABLE `oc_product` (
   `stock_status_id` int(11) NULL DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `manufacturer_id` int(11) NULL DEFAULT NULL,
-  `shipping` tinyint(1) NOT NULL DEFAULT '1',
+  `shipping` tinyint(1) NOT NULL DEFAULT '0',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `points` int(8) NOT NULL DEFAULT '0',
   `tax_class_id` int(11) NOT NULL,

@@ -453,6 +453,7 @@ footer {
   .product-thumb .rating {
     padding-bottom: 10px; }
   .product-thumb .price {
+    font-size: 27px;
     color: #444; }
   .product-thumb .price-new {
     font-weight: 600; }
