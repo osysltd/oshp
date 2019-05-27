@@ -415,10 +415,10 @@ footer {
   color: #888;
   display: block; }
   .list-group a.active, .list-group a.active:hover, .list-group a.active:focus {
-    color: #444;
-    background: #eee;
+    color: white;
+    background: #1e79bd;
     border: 1px solid #ddd;
-    text-shadow: 0 1px 0 #fff; }
+    text-shadow: none; }
 /* carousel */
 .carousel-caption {
   color: #fff;
