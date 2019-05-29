@@ -2475,6 +2475,7 @@ CREATE TABLE `oc_product` (
   `mpn` varchar(64) NOT NULL,
   `location` varchar(128) NOT NULL,
   `variant` text NOT NULL,
+  `override` text NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `stock_status_id` int(11) NULL DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
