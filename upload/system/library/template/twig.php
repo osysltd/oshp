@@ -39,8 +39,10 @@ final class Twig {
 				'cache'       => DIR_CACHE . 'template/'
 			);
 
-			#mod $loader = new \Twig_Loader_Array(array($filename . '.twig' => $code));
-			$loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+			#mod twig loader fix
+			$loader1 = new \Twig_Loader_Array(array($filename . '.twig' => $code));
+			$loader2 = new \Twig_Loader_Filesystem(array(DIR_TEMPLATE)); // to find further includes
+			$loader = new \Twig_Loader_Chain(array($loader1, $loader2));
 
 			try {
 				$twig = new \Twig_Environment($loader, $config);
